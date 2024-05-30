@@ -1,4 +1,4 @@
-/* eslint-disable react/prop-types */
+import React from 'react';
 
 export const Input = ({
     field,
@@ -19,31 +19,39 @@ export const Input = ({
         onBlurHandler(event.target.value, field)
     }
 
-  return (
-    <>
-        <div>
-            <span>{label}</span>
-        </div>
-        {textarea ? (
-            <textarea
-                type={type}
-                value={value}
-                onChange={handleValueChange}
-                onBlur={handleInputBlur}
-                rows={5}
-                style={{maxWidth: '400px'}}
-            />
-        ) : (
-            <input
-                type={type}
-                value={value}
-                onChange={handleValueChange}
-                onBlur={handleInputBlur}
-            />
-        )}
-        <span >
-            {showErrorMessage && validationMessage}
-        </span>
-    </>
-  )
+    return (
+        <>
+            <div className="login-input-container">
+                <label htmlFor={field} className="login-input-label">{label}</label>
+                {textarea ? (
+                    <textarea
+                        id={field}
+                        name={field}
+                        type={type}
+                        value={value}
+                        onChange={handleValueChange}
+                        onBlur={handleInputBlur}
+                        rows={5}
+                        style={{ maxWidth: '400px' }}
+                        className="login-input-field"
+                    />
+                ) : (
+                    <input
+                        id={field}
+                        name={field}
+                        type={type}
+                        value={value}
+                        onChange={handleValueChange}
+                        onBlur={handleInputBlur}
+                        className="login-input-field"
+                    />
+                )}
+                {showErrorMessage && (
+                    <span className="login-error-message">
+                        {validationMessage}
+                    </span>
+                )}
+            </div>
+        </>
+    )
 }
