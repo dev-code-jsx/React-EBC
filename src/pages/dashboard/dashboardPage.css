@@ -1,0 +1,114 @@
+body {
+    margin: 0;
+    background: #F5F5F5;
+  }
+  
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 65px; /* Compact width */
+    height: 100%;
+    background: #ffffff; /* Main sidebar color */
+    color: #000000;
+    transition: width 0.4s;
+    overflow: hidden;
+  }
+  
+  .sidebar.open {
+    width: 240px; /* Expanded width */
+  }
+  
+  .sidebar-inner {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+  
+  .sidebar-header {
+    display: flex;
+    align-items: center;
+    padding: 16px;
+    background: #0D4E85; /* Header background color */
+  }
+  
+  .sidebar-burger {
+    background: none;
+    border: none;
+    color: #FFFFFF;
+    font-size: 24px;
+    cursor: pointer;
+    margin-right: 16px;
+  }
+  
+  .sidebar-logo {
+    height: 40px;
+    transition: opacity 0.3s;
+  }
+  
+  .sidebar-menu {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 16px 0;
+  }
+  
+  .sidebar-button {
+    display: flex;
+    align-items: center;
+    padding: 12px 16px;
+    color: #000000;
+    font-size: 16px;
+    text-transform: capitalize;
+    transition: background 0.3s;
+    cursor: pointer;
+    border: none;
+    background: none;
+    width: 100%;
+    text-align: left;
+    border-color: #000000;
+  }
+  
+  .sidebar-button:hover,
+  .sidebar-button:focus {
+    background: rgba(3, 45, 236, 0.2);
+    outline: none;
+  }
+  
+  .sidebar-icon {
+    width: 24px;
+    height: 24px;
+    margin-right: 16px;
+    transition: opacity 0.3s;
+  }
+  
+  .sidebar-button span {
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  
+  .sidebar.open .sidebar-logo,
+  .sidebar.open .sidebar-button span {
+    opacity: 1;
+  }
+  
+  /* Additional styling for active items and other states */
+  .sidebar-button.active {
+    background: rgba(255, 255, 255, 0.3);
+  }
+  
+  .sidebar-button .icon-home,
+  .sidebar-button .icon-account {
+    filter: invert(1); /* Ensures icons are visible on dark background */
+  }
+  
+  .sidebar-button span {
+    display: inline-block;
+    margin-left: 10px;
+    white-space: nowrap;
+  }
+  
+  .sidebar.open .sidebar-button span {
+    display: inline-block;
+  }
+  

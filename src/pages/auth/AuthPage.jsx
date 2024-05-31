@@ -1,7 +1,19 @@
-import React from 'react'
+import { Login } from "../../components/Login";
+import { useState } from "react";
 
 export const AuthPage = () => {
+  const [isLogin, setIsLogin] = useState(true);
+  const handleAuthPageToggle = () => {
+    setIsLogin((prev) => !prev);
+  };
+
   return (
-    <div>AuthPage</div>
+    <div>
+      {isLogin ? (
+        <Login switchAuthHandler={handleAuthPageToggle}/>
+      ) : (
+        <Register switchAuthHandler={handleAuthPageToggle}/>
+      )}
+    </div>
   )
-}
+};
