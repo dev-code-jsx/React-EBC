@@ -1,0 +1,95 @@
+.container {
+    max-width: 400px;
+    margin: auto;
+    padding: 20px;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.title {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.subtitle {
+    color: gray;
+}
+
+.button-group {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.button {
+    padding: 10px 20px;
+    border: 1px solid black;
+    cursor: pointer;
+}
+
+.button.solid {
+    background-color: #0E3B5D;
+    color: white;
+}
+
+.button.outline {
+    background-color: white;
+    color: black;
+}
+
+.form-section {
+    margin-bottom: 20px;
+}
+
+.input-group {
+    display: flex;
+    gap: 10px;
+}
+
+.input-field {
+    display: flex;
+    flex-direction: column;
+}
+
+.input-field label {
+    margin-bottom: 5px;
+}
+
+.input-field input,
+.input-field textarea {
+    padding: 10px;
+    border: 1px solid #0E3B5D;
+    border-radius: 4px;
+    color: #0E3B5D;
+}
+
+.input-field input::placeholder,
+.input-field textarea::placeholder {
+    color: #0E3B5D;
+}
+
+.input-field input:focus,
+.input-field textarea:focus {
+    outline: none;
+    border-color: black;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.submit-button {
+    width: 100%;
+    padding: 10px;
+    background-color: #0E3B5D;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.login-error-message {
+    color: red;
+    font-size: 0.875rem;
+    margin-top: 0.5rem;
+}
