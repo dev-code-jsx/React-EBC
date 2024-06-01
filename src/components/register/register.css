@@ -1,0 +1,137 @@
+/* register.css */
+
+.container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #f7f7f7;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #0E3B5D;
+}
+
+.subtitle {
+    font-size: 1.2rem;
+    color: gray;
+}
+
+.button-group {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.button {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #0E3B5D;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    border-radius: 4px;
+    text-align: center;
+}
+
+.button.solid {
+    background-color: #0E3B5D;
+    color: white;
+}
+
+.button.outline {
+    background-color: white;
+    color: #0E3B5D;
+}
+
+.button:hover {
+    background-color: #0056b3;
+    color: white;
+}
+
+.form-section {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.input-field {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.input-field label {
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #0E3B5D;
+}
+
+.input-field input,
+.input-field textarea,
+.input-field select {
+    padding: 10px;
+    border: 1px solid #0E3B5D;
+    border-radius: 4px;
+    color: #0E3B5D;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.input-field textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+.input-field input::placeholder,
+.input-field textarea::placeholder {
+    color: #0E3B5D;
+}
+
+.input-field input:focus,
+.input-field textarea:focus,
+.input-field select:focus {
+    outline: none;
+    border-color: #0056b3;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.error-message {
+    color: red;
+    font-size: 0.875rem;
+    margin-top: 5px;
+}
+
+.button-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.submit-button {
+    width: 100%;
+    padding: 15px;
+    background-color: #0E3B5D;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+}
+
+.submit-button:hover {
+    background-color: #0056b3;
+}
