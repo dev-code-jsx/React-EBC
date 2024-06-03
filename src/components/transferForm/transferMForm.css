@@ -1,0 +1,55 @@
+.general-container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #f7f7f7;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.header-text {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #0E3B5D;
+}
+.subtitle {
+    font-size: 1.2rem;
+    color: gray;
+}
+.select-field {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.select-field label {
+    color: #0E3B5D;
+    font-weight: bold;
+}
+
+.select-field select {
+    width: 98%;
+    padding: 10px;
+    border: 1px solid #0E3B5D;
+    border-radius: 4px;
+}
+
+.select-field select:focus {
+    outline: none;
+    border-color: #094069;
+}
+.select-option {
+    padding: 10px;
+    background-color: white;
+    color: #0E3B5D;
+}
+
+.select-option:hover {
+    background-color: #0E3B5D;
+    color: white;
+}
