@@ -10,7 +10,7 @@ import { RegisterPage } from './pages/register/RegisterPage';
 const routes = [
   { path: "/*", element: <AuthPage /> },
   { path: "/dashboard", element: <DashboardPage /> },
-  { path: "/register", element: <RegisterPage /> }
+  { path: "/register", element: <RegisterPage /> },
   {path:'/dashboardTest', element: <TestDashboard/>}
 ]
 
