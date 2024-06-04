@@ -249,6 +249,21 @@ export const Register = () => {
                                 </select>
 
                             </div>
+                            <div className="input-field">
+                                <label htmlFor="typeAccount">Type Account</label>
+                                <select
+                                    id="typeAccount"
+                                    name="typeAccount"
+                                    onChange={(e) => handleInputValueChange(e.target.value, "typeAccount")}
+                                    onBlur={(e) => handleInputBlur(e.target.value, "typeAccount")}
+                                    value={formState.typeAccount?.value || ""}
+                                >
+                                    <option value="">Select Type Account</option>
+                                    <option value="saving">Saving</option>
+                                    <option value="monetary">Monetary</option>
+                                </select>
+
+                            </div>
                         </div>
                     )}
                     {activeSection === "job" && (
