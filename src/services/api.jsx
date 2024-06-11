@@ -18,3 +18,15 @@ const apiClient = axios.create ({
         return Promise.reject(e)
     }
 )*/
+
+export const register = async (data) => {
+    try {
+        console.log({data})
+        return await apiClient.post('/user/register', data)
+    } catch (e) {
+        return{
+            error: true,
+            e
+        }
+    }
+}
