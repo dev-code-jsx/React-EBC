@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const apiClient = axios.create ({
-    baseURL: 'http://localhost:3000/ebc/v1';
+    baseURL: 'http://localhost:3000/ebc/v1',
     timeout: 2000
 })
 
