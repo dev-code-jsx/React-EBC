@@ -6,4 +6,5 @@ export * from './validateAddress'
 export * from './validatePhone'
 export * from './validateEmail'
 export * from './validateJob'
+export * from './validateMonthlyIncome'
 
