@@ -1,4 +1,3 @@
-// components/Register.js
 import React, { useState } from "react";
 import { Input } from "../Input";
 import { useRegister } from "../../shared/hooks/useRegister";
@@ -7,7 +6,7 @@ import "./register.css";
 
 export const Register = () => {
     const { formState, handleInputValueChange, handleInputValidationOnBlur } = useRegisterForm();
-    const { register, isLoading } = useRegister();
+    const { register, isLoading, serverErrors } = useRegister();
     const [activeSection, setActiveSection] = useState("personal");
 
     const handleSubmit = async (event) => {
@@ -197,32 +196,39 @@ export const Register = () => {
                                         label="Monthly Income"
                                         value={formState.monthlyIncome.value}
                                         onChangeHandler={handleInputValueChange}
-                                        type="text"
+                                        type="number"
                                         onBlurHandler={handleInputValidationOnBlur}
                                         showErrorMessage={formState.monthlyIncome.showError}
                                         validationMessage="Please enter a valid monthly income."
                                     />
                                 </div>
                                 <div className="input-field">
-                                    <label htmlFor="type">Type</label>
                                     <select
-                                        id="type"
                                         name="type"
-                                        onChange={(e) => handleInputValueChange(e.target.value, "type")}
-                                        onBlur={(e) => handleInputValidationOnBlur(e.target.value, "type")}
-                                        value={formState.type.value || ""}
+                                        value={formState.type.value}
+                                        onChange={(e) => handleInputValueChange('type', e.target.value)}
+                                        onBlur={(e) => handleInputValidationOnBlur('type')}
                                     >
-                                        <option value="">Select type</option>
-                                        <option value="monetary">Monetary</option>
-                                        <option value="saving">Saving</option>
+                                        <option value="">Select Type</option>
+                                        <option value="MONETARY">MONETARY</option>
+                                        <option value="SAVING">SAVING</option>
                                     </select>
                                 </div>
                             </div>
                         </div>
                     )}
                     <button type="submit" disabled={isSubmitButtonDisabled}>
-                        Register
+                        {isLoading ? "Registering..." : "Register"}
                     </button>
+                    {serverErrors.length > 0 && (
+                        <div className="server-errors">
+                            {serverErrors.map((error, index) => (
+                                <div key={index} className="error-message">
+                                    {error.msg}
+                                </div>
+                            ))}
+                        </div>
+                    )}
                 </form>
             </div>
         </div>

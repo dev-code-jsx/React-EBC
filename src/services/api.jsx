@@ -5,28 +5,22 @@ const apiClient = axios.create ({
     timeout: 2000
 })
 
-/*apiClient.interceptors.request.use(
-    (config) => {
-        const userDetails = localStorage.getItem('user')
-        if (userDetails) {
-            const token = JSON.parse(userDetails || {}).token
-            config.headers.Authorization = `Bearer ${token}`
-        }
-        return config
-    },
-    (e) => {
-        return Promise.reject(e)
-    }
-)*/
 
 export const register = async (data) => {
     try {
-        console.log({data})
-        return await apiClient.post('/user/register', data)
+        console.log({ data });
+        const response = await apiClient.post('/user/register', data);
+        return response.data;
     } catch (e) {
-        return{
-            error: true,
-            e
+        if (e.response) {
+            // Respuesta de servidor con error (código 4xx o 5xx)
+            return e.response.data;
+        } else if (e.request) {
+            // Error de solicitud
+            return { error: true, message: 'No response from server' };
+        } else {
+            // Error en la configuración de axios
+            return { error: true, message: e.message };
         }
     }
-}
+};
