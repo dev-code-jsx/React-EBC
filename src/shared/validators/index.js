@@ -5,5 +5,5 @@ export * from './validateDPI'
 export * from './validateAddress'
 export * from './validatePhone'
 export * from './validateEmail'
-
+export * from './validateJob'
 
