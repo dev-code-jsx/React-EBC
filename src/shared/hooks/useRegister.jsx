@@ -1,58 +1,28 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { register as registerRequest } from '../../services/api';
-import toast from 'react-hot-toast';
+import { useState } from 'react';
+import { register as registerService } from '../../services/api';
 
 export const useRegister = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [serverErrors, setServerErrors] = useState([]);
 
-    const navigate = useNavigate();
-
-    const register = async (username, names, lastNames, dpi, address, phone, email, job, monthlyIncome, type) => {
+    const register = async (data) => {
         setIsLoading(true);
+        setServerErrors([]);
+        const response = await registerService(data);
+        setIsLoading(false);
 
-        try {
-            const response = await registerRequest({
-                username,
-                names,
-                lastNames,
-                dpi,
-                address,
-                phone,
-                email,
-                job,
-                monthlyIncome,
-                type
-            });
-
-            setIsLoading(false);
-            
-            if (response.errors) {
-                setServerErrors(response.errors);
-                toast.error('Error al registrar: ' + response.errors.map(err => err.msg).join(', '));
-            } else if (response.error) {
-                setServerErrors([{ msg: response.message }]);
-                toast.error('Error al registrar: ' + response.message);
-            } else {
-                const { user } = response;
-                if (user) {
-                    localStorage.setItem('user', JSON.stringify(user));
-                    navigate('/');
-                } else {
-                    localStorage.removeItem('user');
-                }
-            }
-        } catch (error) {
-            setIsLoading(false);
-            setServerErrors([{ msg: 'Server error' }]);
-            toast.error('Server error');
+        if (response.errors) {
+            setServerErrors(response.errors);
+            return response;
+        } else {
+            return response;
         }
-    }
+    };
 
     return {
         register,
         isLoading,
-        serverErrors
-    }
-}
+        serverErrors,
+        setServerErrors,
+    };
+};  

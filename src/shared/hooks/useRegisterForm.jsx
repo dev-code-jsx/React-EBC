@@ -1,91 +1,53 @@
-// shared/hooks/useRegisterForm.js
-import { useState } from "react";
-import {
-    validateUsername,
-    validateNames,
-    validateLastNames,
-    validateDPI,
-    validateAddress,
-    validatePhone,
-    validateEmail,
-    validateJob,
-    validateMonthlyIncome,
-    validateType,
-} from "../validators";
+import { useState } from 'react';
 
 const useRegisterForm = () => {
-    const initialFormState = {
-        username: { value: "", isValid: false, showError: false },
-        dpi: { value: "", isValid: false, showError: false },
-        names: { value: "", isValid: false, showError: false },
-        lastNames: { value: "", isValid: false, showError: false },
-        phone: { value: "", isValid: false, showError: false },
-        email: { value: "", isValid: false, showError: false },
-        address: { value: "", isValid: false, showError: false },
-        job: { value: "", isValid: false, showError: false },
-        monthlyIncome: { value: "", isValid: false, showError: false },
-        type: { value: "", isValid: false, showError: false },
-    };
-
-    const [formState, setFormState] = useState(initialFormState);
+    const [formState, setFormState] = useState({
+        username: { value: '', isValid: true, showError: false, validationMessage: '' },
+        names: { value: '', isValid: true, showError: false, validationMessage: '' },
+        lastNames: { value: '', isValid: true, showError: false, validationMessage: '' },
+        dpi: { value: '', isValid: true, showError: false, validationMessage: '' },
+        address: { value: '', isValid: true, showError: false, validationMessage: '' },
+        phone: { value: '', isValid: true, showError: false, validationMessage: '' },
+        email: { value: '', isValid: true, showError: false, validationMessage: '' },
+        job: { value: '', isValid: true, showError: false, validationMessage: '' },
+        monthlyIncome: { value: '', isValid: true, showError: false, validationMessage: '' },
+        type: { value: '', isValid: true, showError: false, validationMessage: '' },
+    });
 
     const handleInputValueChange = (value, field) => {
         setFormState((prevState) => ({
             ...prevState,
-            [field]: {
-                ...prevState[field],
-                value,
-            },
+            [field]: { ...prevState[field], value }
         }));
     };
 
     const handleInputValidationOnBlur = (value, field) => {
-        let isValid = false;
-        switch (field) {
-            case "username":
-                isValid = validateUsername(value);
-                break;
-            case "names":
-                isValid = validateNames(value);
-                break;
-            case "lastNames":
-                isValid = validateLastNames(value);
-                break;
-            case "dpi":
-                isValid = validateDPI(value);
-                break;
-            case "address":
-                isValid = validateAddress(value);
-                break;
-            case "phone":
-                isValid = validatePhone(value);
-                break;
-            case "email":
-                isValid = validateEmail(value);
-                break;
-            case "job":
-                isValid = validateJob(value);
-                break;
-            case "monthlyIncome":
-                isValid = validateMonthlyIncome(value);
-                break;
-            case "type":
-                isValid = validateType(value);
-                break;
-            default:
-                break;
+        if (field === 'dpi') {
+            let isValid = value.trim() !== '';
+            let validationMessage = isValid ? '' : 'DPI is required';
+
+            setFormState((prevState) => ({
+                ...prevState,
+                [field]: { ...prevState[field], isValid, showError: !isValid, validationMessage }
+            }));
+        } else {
+            // Add validations for other fields here if needed
+            // Example:
+            // let isValid = value.trim() !== '';
+            // let validationMessage = isValid ? '' : `${field} is required`;
+            // setFormState((prevState) => ({
+            //     ...prevState,
+            //     [field]: { ...prevState[field], isValid, showError: !isValid, validationMessage }
+            // }));
         }
-        setFormState((prevState) => ({
-            ...prevState,
-            [field]: {
-                ...prevState[field],
-                isValid,
-                showError: !isValid,
-            },
-        }));
     };
 
-    return { formState, handleInputValueChange, handleInputValidationOnBlur };
+    return {
+        formState,
+        handleInputValueChange,
+        handleInputValidationOnBlur,
+        setFormState
+    };
 };
 
 export default useRegisterForm;

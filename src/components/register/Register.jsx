@@ -5,17 +5,16 @@ import useRegisterForm from "../../shared/hooks/useRegisterForm";
 import "./register.css";
 
 export const Register = () => {
-    const { formState, handleInputValueChange, handleInputValidationOnBlur } = useRegisterForm();
-    const { register, isLoading, serverErrors } = useRegister();
+    const { formState, handleInputValueChange, handleInputValidationOnBlur, setFormState } = useRegisterForm();
+    const { register, isLoading, serverErrors, setServerErrors } = useRegister();
     const [activeSection, setActiveSection] = useState("personal");
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        console.log('Formulario de registro', formState);
 
         const missingFields = [];
         for (const [field, state] of Object.entries(formState)) {
-            if (!state.isValid) {
+            if (!state.isValid && field !== 'dpi') { // Exclude dpi from validation here
                 missingFields.push(field);
             }
         }
@@ -23,18 +22,40 @@ export const Register = () => {
         if (missingFields.length > 0) {
             alert(`Please fill in the following fields: ${missingFields.join(", ")}`);
         } else {
-            await register(
-                formState.username.value,
-                formState.names.value,
-                formState.lastNames.value,
-                formState.dpi.value,
-                formState.address.value,
-                formState.phone.value,
-                formState.email.value,
-                formState.job.value,
-                formState.monthlyIncome.value,
-                formState.type.value
-            );
+            const result = await register({
+                username: formState.username.value,
+                names: formState.names.value,
+                lastNames: formState.lastNames.value,
+                dpi: Number(formState.dpi.value),
+                address: formState.address.value,
+                phone: formState.phone.value,
+                email: formState.email.value,
+                job: formState.job.value,
+                monthlyIncome: formState.monthlyIncome.value,
+                type: formState.type.value,
+            });
+
+            if (result && result.errors) {
+                console.error('Server validation errors:', result.errors);
+                result.errors.forEach(error => {
+                    const { path, msg } = error;
+                    setFormState(prevState => ({
+                        ...prevState,
+                        [path]: {
+                            ...prevState[path],
+                            isValid: false,
+                            showError: true,
+                            validationMessage: msg
+                        }
+                    }));
+                });
+                setServerErrors(result.errors); // Update serverErrors state
+            } else {
+                setServerErrors([]); // Clear serverErrors state
+                // Handle successful registration if needed
+                console.log('User registered successfully:', result);
+                // Optionally, redirect or perform any other action upon successful registration
+            }
         }
     };
 
@@ -43,7 +64,6 @@ export const Register = () => {
         !formState.username.isValid ||
         !formState.names.isValid ||
         !formState.lastNames.isValid ||
-        !formState.dpi.isValid ||
         !formState.address.isValid ||
         !formState.phone.isValid ||
         !formState.email.isValid ||
@@ -91,7 +111,7 @@ export const Register = () => {
                                         type="text"
                                         onBlurHandler={handleInputValidationOnBlur}
                                         showErrorMessage={formState.username.showError}
-                                        validationMessage="Please enter a valid username."
+                                        validationMessage={formState.username.validationMessage}
                                     />
                                 </div>
                                 <div className="input-field">
@@ -103,7 +123,7 @@ export const Register = () => {
                                         type="text"
                                         onBlurHandler={handleInputValidationOnBlur}
                                         showErrorMessage={formState.names.showError}
-                                        validationMessage="Please enter valid names."
+                                        validationMessage={formState.names.validationMessage}
                                     />
                                 </div>
                                 <div className="input-field">
@@ -115,7 +135,7 @@ export const Register = () => {
                                         type="text"
                                         onBlurHandler={handleInputValidationOnBlur}
                                         showErrorMessage={formState.lastNames.showError}
-                                        validationMessage="Please enter valid last names."
+                                        validationMessage={formState.lastNames.validationMessage}
                                     />
                                 </div>
                                 <div className="input-field">
@@ -127,7 +147,7 @@ export const Register = () => {
                                         type="text"
                                         onBlurHandler={handleInputValidationOnBlur}
                                         showErrorMessage={formState.dpi.showError}
-                                        validationMessage="Please enter a valid DPI."
+                                        validationMessage={formState.dpi.validationMessage}
                                     />
                                 </div>
                             </div>
@@ -145,7 +165,7 @@ export const Register = () => {
                                         type="text"
                                         onBlurHandler={handleInputValidationOnBlur}
                                         showErrorMessage={formState.address.showError}
-                                        validationMessage="Please enter a valid address."
+                                        validationMessage={formState.address.validationMessage}
                                     />
                                 </div>
                                 <div className="input-field">
@@ -154,10 +174,10 @@ export const Register = () => {
                                         label="Phone"
                                         value={formState.phone.value}
                                         onChangeHandler={handleInputValueChange}
-                                        type="tel"
+                                        type="text"
                                         onBlurHandler={handleInputValidationOnBlur}
                                         showErrorMessage={formState.phone.showError}
-                                        validationMessage="Please enter a valid phone number."
+                                        validationMessage={formState.phone.validationMessage}
                                     />
                                 </div>
                                 <div className="input-field">
@@ -166,22 +186,10 @@ export const Register = () => {
                                         label="Email"
                                         value={formState.email.value}
                                         onChangeHandler={handleInputValueChange}
-                                        type="email"
-                                        onBlurHandler={handleInputValidationOnBlur}
-                                        showErrorMessage={formState.email.showError}
-                                        validationMessage="Please enter a valid email address."
-                                    />
-                                </div>
-                                <div className="input-field">
-                                    <Input
-                                        field="job"
-                                        label="Job"
-                                        value={formState.job.value}
-                                        onChangeHandler={handleInputValueChange}
                                         type="text"
                                         onBlurHandler={handleInputValidationOnBlur}
-                                        showErrorMessage={formState.job.showError}
-                                        validationMessage="Please enter a valid job title."
+                                        showErrorMessage={formState.email.showError}
+                                        validationMessage={formState.email.validationMessage}
                                     />
                                 </div>
                             </div>
@@ -192,48 +200,54 @@ export const Register = () => {
                             <div className="input-group">
                                 <div className="input-field">
                                     <Input
+                                        field="job"
+                                        label="Job"
+                                        value={formState.job.value}
+                                        onChangeHandler={handleInputValueChange}
+                                        type="text"
+                                        onBlurHandler={handleInputValidationOnBlur}
+                                        showErrorMessage={formState.job.showError}
+                                        validationMessage={formState.job.validationMessage}
+                                    />
+                                </div>
+                                <div className="input-field">
+                                    <Input
                                         field="monthlyIncome"
                                         label="Monthly Income"
                                         value={formState.monthlyIncome.value}
                                         onChangeHandler={handleInputValueChange}
-                                        type="number"
+                                        type="text"
                                         onBlurHandler={handleInputValidationOnBlur}
                                         showErrorMessage={formState.monthlyIncome.showError}
-                                        validationMessage="Please enter a valid monthly income."
+                                        validationMessage={formState.monthlyIncome.validationMessage}
                                     />
                                 </div>
                                 <div className="input-field">
-                                    <select
-                                        name="type"
+                                    <Input
+                                        field="type"
+                                        label="Type"
                                         value={formState.type.value}
-                                        onChange={(e) => handleInputValueChange('type', e.target.value)}
-                                        onBlur={(e) => handleInputValidationOnBlur('type')}
-                                    >
-                                        <option value="">Select Type</option>
-                                        <option value="MONETARY">MONETARY</option>
-                                        <option value="SAVING">SAVING</option>
-                                    </select>
+                                        onChangeHandler={handleInputValueChange}
+                                        type="text"
+                                        onBlurHandler={handleInputValidationOnBlur}
+                                        showErrorMessage={formState.type.showError}
+                                        validationMessage={formState.type.validationMessage}
+                                    />
                                 </div>
                             </div>
                         </div>
                     )}
-                    <button type="submit" disabled={isSubmitButtonDisabled}>
-                        {isLoading ? "Registering..." : "Register"}
-                    </button>
-                    {serverErrors.length > 0 && (
-                        <div className="server-errors">
-                            {serverErrors.map((error, index) => (
-                                <div key={index} className="error-message">
-                                    {error.msg}
-                                </div>
-                            ))}
-                        </div>
-                    )}
+                    <div className="form-submit">
+                        <button type="submit" className="button solid" disabled={isSubmitButtonDisabled}>
+                            {isLoading ? "Submitting..." : "Submit"}
+                        </button>
+                    </div>
                 </form>
             </div>
         </div>
     );
 };
+
 /*
 1.username
 2.names
