@@ -8,4 +8,5 @@ export * from './validateEmail'
 export * from './validateJob'
 export * from './validateMonthlyIncome'
 export * from './validateType'
+export * from './validatePassword'
 

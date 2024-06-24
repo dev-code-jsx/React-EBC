@@ -1,17 +1,20 @@
-import logo from '../assets/img/logo.png'
-import {Input} from '../components/Input' 
-import '../pages/auth/authPage.css'
+import logo from "../assets/img/logo.png";
+import { Input } from "../components/Input";
+import { useState } from "react";
+import { useLogin } from "../shared/hooks/useLogin";
+import { validatePassword } from "../shared/validators";
+import "../pages/auth/authPage.css";
 
 export const Login = () => {
-/*  const {login, isLoading} = useLogin();
-  
+  const { login, isLoading } = useLogin();
+
   const [formState, setFormState] = useState({
-    email: {
+    codeUser: {
       value: "",
       isValid: false,
       showError: false,
     },
-    password: {
+    password: { 
       value: "",
       isValid: false,
       showError: false,
@@ -31,69 +34,69 @@ export const Login = () => {
   const handleInputValidationOnBlur = (value, field) => {
     let isValid = false;
     switch (field) {
-      case "email":
-        isValid = validateEmail(value);
-        break;
+      case "codeUser":
+ 
       case "password":
         isValid = validatePassword(value);
         break;
       default:
         break;
     }
-    setFormState((prevState) =>({
-        ...prevState,
-        [field]:{
-            ...prevState[field],
-            isValid,
-            showError: !isValid
-        }
-    }))
+    setFormState((prevState) => ({
+      ...prevState,
+      [field]: {
+        ...prevState[field],
+        isValid,
+        showError: !isValid,
+      },
+    }));
   };
 
   const handleLogin = (event) => {
-    event.preventDefault()
+    event.preventDefault();
 
-    login(formState.email.value, formState.password.value)
-  }
+    login(formState.codeUser.value, formState.password.value);
+  };
 
-  const isSubmitButtonDisabled = isLoading || !formState.password.isValid || !formState.email.isValid  
-*/
+  const isSubmitButtonDisabled =
+    isLoading || !formState.password.isValid || !formState.codeUser.isValid;
   return (
     <div className="login-body">
-      <div className="login-container">
+    <div className="login-container">
         <div className="login-logo">
-          <img src={logo} alt="Logo" className="login-logo-img" />
+            <img src={logo} alt="Logo" className="login-logo-img" />
         </div>
         <h1 className="login-title">Welcome</h1>
         <form className="login-form">
-          <Input
-            field="email"
-            label="Email"
-          //  value={formState.email.value}
-      //      onChangeHandler={handleInputValueChange}
-            type="text"
-        //    onBlurHandler={handleInputValidationOnBlur}
-        //    showErrorMessage={formState.email.showError}
-         //   validationMessage={emailValidationMessage}
-          />
-          <Input
-            field="password"
-            label="Password"
-        //    value={formState.password.value}
-        //    onChangeHandler={handleInputValueChange}
-            type="password"
-         //   onBlurHandler={handleInputValidationOnBlur}
-         //   showErrorMessage={formState.password.showError}
-        //    validationMessage={passwordValidationMessage}
-          />
-          <button className="login-button" >
-            Log in
-          </button>
+            <Input
+                field="codeUser"
+                label="CodeUser"
+                value={formState.codeUser.value}
+                onChangeHandler={handleInputValueChange}
+                type="text"
+                onBlurHandler={handleInputValidationOnBlur}
+                showErrorMessage={formState.codeUser.showError}
+                validationMessage="Invalid CodeUser"
+            />
+            <Input
+                field="password"
+                label="Password"
+                value={formState.password.value}
+                onChangeHandler={handleInputValueChange}
+                type="password"
+                onBlurHandler={handleInputValidationOnBlur}
+                showErrorMessage={formState.password.showError}
+                validationMessage="Invalid Password"
+            />
+            <button
+                className="login-button"
+                onClick={handleLogin}
+                disabled={isSubmitButtonDisabled}
+            >
+                Log in
+            </button>
         </form>
-        <div className="login-link">
-
         </div>
       </div>
-    </div>
   );
-}
+};

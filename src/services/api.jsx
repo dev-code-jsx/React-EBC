@@ -5,6 +5,31 @@ const apiClient = axios.create ({
     timeout: 2000
 })
 
+apiClient.interceptors.request.use(
+    (config) => {
+        const userDetails = localStorage.getItem('user');
+        if (userDetails) {
+            const token = JSON.parse(userDetails).token;
+            config.headers.Authorization = `Bearer ${token}`;
+        }
+        return config;
+    },
+    (e) => {
+        return Promise.reject(e);
+    }
+);
+
+export const login = async (data) => {
+    try {
+        return await apiClient.post('/login/auth', data);
+    } catch (e) {
+        return {
+            error: true,
+            e
+        };
+    }    
+}
+
 
 export const register = async (data) => {
     try {
