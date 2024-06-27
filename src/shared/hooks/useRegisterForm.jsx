@@ -22,24 +22,13 @@ const useRegisterForm = () => {
     };
 
     const handleInputValidationOnBlur = (value, field) => {
-        if (field === 'dpi') {
-            let isValid = value.trim() !== '';
-            let validationMessage = isValid ? '' : 'DPI is required';
+        let isValid = value.trim() !== '';
+        let validationMessage = isValid ? '' : `${field.charAt(0).toUpperCase() + field.slice(1)} is required`;
 
-            setFormState((prevState) => ({
-                ...prevState,
-                [field]: { ...prevState[field], isValid, showError: !isValid, validationMessage }
-            }));
-        } else {
-            // Add validations for other fields here if needed
-            // Example:
-            // let isValid = value.trim() !== '';
-            // let validationMessage = isValid ? '' : `${field} is required`;
-            // setFormState((prevState) => ({
-            //     ...prevState,
-            //     [field]: { ...prevState[field], isValid, showError: !isValid, validationMessage }
-            // }));
-        }
+        setFormState((prevState) => ({
+            ...prevState,
+            [field]: { ...prevState[field], isValid, showError: !isValid, validationMessage }
+        }));
     };
 
     return {
