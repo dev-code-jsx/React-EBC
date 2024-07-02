@@ -35,7 +35,8 @@ export const Login = () => {
     let isValid = false;
     switch (field) {
       case "codeUser":
- 
+        isValid = value.trim() !== ""; // A simple validation for codeUser
+        break;
       case "password":
         isValid = validatePassword(value);
         break;
@@ -60,43 +61,44 @@ export const Login = () => {
 
   const isSubmitButtonDisabled =
     isLoading || !formState.password.isValid || !formState.codeUser.isValid;
+  
   return (
     <div className="login-body">
-    <div className="login-container">
+      <div className="login-container">
         <div className="login-logo">
-            <img src={logo} alt="Logo" className="login-logo-img" />
+          <img src={logo} alt="Logo" className="login-logo-img" />
         </div>
         <h1 className="login-title">Welcome</h1>
         <form className="login-form">
-            <Input
-                field="codeUser"
-                label="CodeUser"
-                value={formState.codeUser.value}
-                onChangeHandler={handleInputValueChange}
-                type="text"
-                onBlurHandler={handleInputValidationOnBlur}
-                showErrorMessage={formState.codeUser.showError}
-                validationMessage="Invalid CodeUser"
-            />
-            <Input
-                field="password"
-                label="Password"
-                value={formState.password.value}
-                onChangeHandler={handleInputValueChange}
-                type="password"
-                onBlurHandler={handleInputValidationOnBlur}
-                showErrorMessage={formState.password.showError}
-                validationMessage="Invalid Password"
-            />
-            <button
-                className="login-button"
-                onClick={handleLogin}
-                disabled={isSubmitButtonDisabled}
-            >
-                Log in
-            </button>
+          <Input
+            field="codeUser"
+            label="Code User"
+            value={formState.codeUser.value}
+            onChangeHandler={handleInputValueChange}
+            type="text"
+            onBlurHandler={handleInputValidationOnBlur}
+            showErrorMessage={formState.codeUser.showError}
+            validationMessage="Invalid Code User"
+          />
+          <Input
+            field="password"
+            label="Password"
+            value={formState.password.value}
+            onChangeHandler={handleInputValueChange}
+            type="password"
+            onBlurHandler={handleInputValidationOnBlur}
+            showErrorMessage={formState.password.showError}
+            validationMessage="Invalid Password"
+          />
+          <button
+            className="login-button"
+            onClick={handleLogin}
+            disabled={isSubmitButtonDisabled}
+          >
+            Log in
+          </button>
         </form>
-        </div>
       </div>
+    </div>
   );
 };
