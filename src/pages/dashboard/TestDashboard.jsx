@@ -5,6 +5,7 @@ import { TransferMForm } from '../../components/transferForm/TransferMForm'
 export const TestDashboard = () => {
   return (
     <div>
+      <HelpInfo/>
       <TransferMForm/>
     </div>
   )
