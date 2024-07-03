@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+/* eslint-disable no-unused-vars */
+import React, { useState, useEffect } from "react";
 import { Input } from "../Input";
 import { useRegister } from "../../shared/hooks/useRegister";
 import useRegisterForm from "../../shared/hooks/useRegisterForm";
@@ -9,12 +10,30 @@ export const Register = () => {
     const { register, isLoading, serverErrors, setServerErrors } = useRegister();
     const [activeSection, setActiveSection] = useState("personal");
 
+
+    useEffect(() => {
+        if (!isLoading && serverErrors.length === 0) {
+            setFormState({
+                username: { value: '', isValid: true, showError: false, validationMessage: '' },
+                names: { value: '', isValid: true, showError: false, validationMessage: '' },
+                lastNames: { value: '', isValid: true, showError: false, validationMessage: '' },
+                dpi: { value: '', isValid: true, showError: false, validationMessage: '' },
+                address: { value: '', isValid: true, showError: false, validationMessage: '' },
+                phone: { value: '', isValid: true, showError: false, validationMessage: '' },
+                email: { value: '', isValid: true, showError: false, validationMessage: '' },
+                job: { value: '', isValid: true, showError: false, validationMessage: '' },
+                monthlyIncome: { value: '', isValid: true, showError: false, validationMessage: '' },
+                type: { value: '', isValid: true, showError: false, validationMessage: '' },
+            });
+        }
+    }, [isLoading, serverErrors, setFormState]);
+
     const handleSubmit = async (event) => {
         event.preventDefault();
 
         const missingFields = [];
         for (const [field, state] of Object.entries(formState)) {
-            if (!state.isValid && field !== 'dpi') { // Exclude dpi from validation here
+            if (!state.isValid) {
                 missingFields.push(field);
             }
         }
@@ -28,7 +47,7 @@ export const Register = () => {
                 lastNames: formState.lastNames.value,
                 dpi: Number(formState.dpi.value),
                 address: formState.address.value,
-                phone: formState.phone.value,
+                phone: Number(formState.phone.value),
                 email: formState.email.value,
                 job: formState.job.value,
                 monthlyIncome: formState.monthlyIncome.value,
@@ -49,12 +68,12 @@ export const Register = () => {
                         }
                     }));
                 });
-                setServerErrors(result.errors); // Update serverErrors state
+                setServerErrors(result.errors);
             } else {
-                setServerErrors([]); // Clear serverErrors state
-                // Handle successful registration if needed
+                setServerErrors([]);
+
                 console.log('User registered successfully:', result);
-                // Optionally, redirect or perform any other action upon successful registration
+
             }
         }
     };
@@ -64,6 +83,7 @@ export const Register = () => {
         !formState.username.isValid ||
         !formState.names.isValid ||
         !formState.lastNames.isValid ||
+        !formState.dpi.isValid || 
         !formState.address.isValid ||
         !formState.phone.isValid ||
         !formState.email.isValid ||
@@ -186,7 +206,7 @@ export const Register = () => {
                                         label="Email"
                                         value={formState.email.value}
                                         onChangeHandler={handleInputValueChange}
-                                        type="text"
+                                        type="email"
                                         onBlurHandler={handleInputValidationOnBlur}
                                         showErrorMessage={formState.email.showError}
                                         validationMessage={formState.email.validationMessage}
@@ -237,9 +257,20 @@ export const Register = () => {
                             </div>
                         </div>
                     )}
-                    <div className="form-submit">
-                        <button type="submit" className="button solid" disabled={isSubmitButtonDisabled}>
-                            {isLoading ? "Submitting..." : "Submit"}
+                    {serverErrors.length > 0 && (
+                        <div className="error-messages">
+                            {serverErrors.map((error, index) => (
+                                <p key={index}>{error.msg}</p>
+                            ))}
+                        </div>
+                    )}
+                    <div className="button-group">
+                        <button
+                            className="button solid"
+                            type="submit"
+                            disabled={isSubmitButtonDisabled}
+                        >
+                            Register
                         </button>
                     </div>
                 </form>
@@ -247,16 +278,3 @@ export const Register = () => {
         </div>
     );
 };
-
-/*
-1.username
-2.names
-3.lastnames
-4.role (este es un comboBox con opciones de admin o user)
-5.dpi
-6.address 
-7.phone
-8.email
-9job
-10.monthlyIncome
-*/
