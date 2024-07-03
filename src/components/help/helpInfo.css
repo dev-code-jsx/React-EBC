@@ -1,0 +1,51 @@
+.card-info {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 16px;
+    background-color: #f9f9f9;
+    padding: 5%;
+    height: 300%;
+    max-width: 800px;
+    width: 50%;
+    color: #333;
+    margin: 40px auto;
+  }
+  .card-info h2 {
+    color: #002855; 
+    margin-bottom: 8px;
+  }
+  .description{
+    font-size: 1.5rem;
+    text-align: justify;
+  }
+  .title{
+    font-size: 2.5rem;
+      font-weight: bold;
+      color: #0E3B5D;
+      text-align: center;
+  }
+  .card-info p {
+    color: #333;
+  }
+  
+  .contact-info {
+    margin-top: 16px;
+    font-size: 1.5rem;
+  }
+  
+  .contact-item {
+    margin-bottom: 16px;
+  }
+  
+  .contact-detail {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .icon {
+    width: 60px;
+    height: 60px;
+  }
+  
+  
