@@ -6,7 +6,7 @@ import { Transfer } from "./pages/transfer/Transfer";
 import { Queries } from "./pages/queries/Queries";
 import { RegisterPage } from "./pages/register/RegisterPage";
 import { DashboardAdmin } from "./pages/dashboardAdmin/DashboardAdmin";
-
+import { Help } from "./pages/help/Help";
 const routes = [
   { path: "/*", element: <AuthPage /> },
   { path: "/dashboard", element: <DashboardPage /> },
