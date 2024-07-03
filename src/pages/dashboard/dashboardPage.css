@@ -4,21 +4,27 @@ body {
   font-family: 'Arial', sans-serif;
 }
 
+.dashboard {
+  display: flex;
+  min-height: 100vh;
+}
+
 .sidebar {
   position: fixed;
   top: 0;
   left: 0;
-  width: 65px; 
+  width: 65px;
   height: 100%;
-  background: #ffffff; 
+  background: #ffffff;
   color: #000000;
   transition: width 0.4s;
   overflow: hidden;
-  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); 
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
 }
 
 .sidebar.open {
-  width: 240px; 
+  width: 240px;
 }
 
 .sidebar-inner {
@@ -31,7 +37,7 @@ body {
   display: flex;
   align-items: center;
   padding: 16px;
-  background: #0D4E85; 
+  background: #0D4E85;
 }
 
 .sidebar-burger {
@@ -49,7 +55,6 @@ body {
   margin-right: 10px;
   background-color: white;
   border-radius: 50%;
-  color: white;
 }
 
 .sidebar-header p {
@@ -87,7 +92,6 @@ body {
   background: none;
   width: 100%;
   text-align: left;
-  border-color: #000000;
 }
 
 .sidebar-button:hover,
@@ -113,32 +117,16 @@ body {
   opacity: 1;
 }
 
-
 .sidebar-button.active {
   background: rgba(255, 255, 255, 0.3);
 }
 
-.sidebar-button .icon-home,
-.sidebar-button .icon-account {
-  filter: invert(1); 
-}
-
-.sidebar-button span {
-  display: inline-block;
-  margin-left: 10px;
-  white-space: nowrap;
-}
-
-.sidebar.open .sidebar-button span {
-  display: inline-block;
-}
-
-
 .content {
-  margin-left: 65px; 
+  flex: 1;
+  margin-left: 65px;
   padding: 20px;
-  background: #ffffff; 
-  min-height: 100vh; 
+  background: #ffffff;
+  min-height: 100vh;
   transition: margin-left 0.4s;
 }
 
@@ -147,7 +135,7 @@ body {
 }
 
 .content > div {
-  background: #f0f0f0; 
+  background: #f0f0f0;
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -155,14 +143,15 @@ body {
 }
 
 .content > div:hover {
-  background: #e0e0e0; 
+  background: #e0e0e0;
 }
 
 @media (max-width: 768px) {
   .sidebar {
-    width: 100%;
+    width: 240px;
     height: auto;
     position: relative;
+    flex-direction: column;
   }
 
   .sidebar.open {
@@ -176,9 +165,23 @@ body {
 
   .content {
     margin-left: 0;
+    width: 100%;
   }
 
   .sidebar.open + .content {
     margin-left: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .sidebar-button {
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  .sidebar-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
   }
 }

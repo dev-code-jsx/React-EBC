@@ -72,7 +72,7 @@ export const DashboardPage = () => {
             {navItems.map((item) => (
               <button
                 key={item.id}
-                className="sidebar-button"
+                className={`sidebar-button ${activeComponent === item.id ? 'active' : ''}`}
                 onClick={() => handleNavClick(item.id)}
               >
                 <img
