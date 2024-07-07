@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const apiClient = axios.create ({
-    baseURL: 'http://localhost:3000/ebc/v1',
+    baseURL: 'https://node-ebc.vercel.app',
     timeout: 2000
 })
 
@@ -47,6 +47,23 @@ export const register = async (data) => {
             return { error: true, message: 'No response from server' };
         } else {
             // Error en la configuración de axios
+            console.error('Axios configuration error:', e.message);
+            return { error: true, message: e.message };
+        }
+    }
+};
+export const addFavorite = async (data) => {
+    try {
+        const response = await apiClient.post('/account/addFavorite', data);
+        return response.data;
+    } catch (e) {
+        if (e.response) {
+            console.error('Server response error:', e.response.data);
+            return e.response.data;
+        } else if (e.request) {
+            console.error('No response from server:', e.request);
+            return { error: true, message: 'No response from server' };
+        } else {
             console.error('Axios configuration error:', e.message);
             return { error: true, message: e.message };
         }

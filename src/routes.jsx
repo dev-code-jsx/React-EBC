@@ -15,6 +15,7 @@ const routes = [
   { path:"/queries", element:<Queries/>},
   { path: "/dashboardTest", element: <TestDashboard /> },
   { path: "/dashboardAdmin", element: <DashboardAdmin /> },
+  { path: "/transfer", element: <Transfer/>}
 ]
 
 export default routes;
