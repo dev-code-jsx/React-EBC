@@ -81,3 +81,27 @@ export const getServicios = async () => {
         }
     }
 }
+
+export const registerService = async (data) => {
+  try {
+    return await apiClient.post("/service/addService", data);
+  } catch (e) {
+    return { error: true, e };
+  }
+};
+
+export const updateService = async (data) => {
+  try {
+    return await apiClient.put(`/service/updateService/${data.id}`, data);
+  } catch (e) {
+    return { error: true, e };
+  }
+};
+
+export const deleteService = async (id) => {
+  try {
+    return await apiClient.delete(`/service/deleteService/${id}`);
+  } catch (e) {
+    return { error: true, e };
+  }
+};

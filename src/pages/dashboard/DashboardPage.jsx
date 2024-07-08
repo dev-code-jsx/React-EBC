@@ -18,6 +18,7 @@ import { ServiciosPage } from "../service/ServicePage";
 import { History } from "../history/History";
 import { Currency } from "../currency/Currency";
 import { Help } from "../help/Help";
+import { ServiciosAdminPage } from "../service/ServiceAdminPage";
 
 const navItems = [
   { id: "home", label: "Home", icon: homeIcon },
@@ -25,20 +26,22 @@ const navItems = [
   { id: "transfer", label: "Transfer", icon: transerIcon },
   { id: "queries", label: "Queries", icon: queriesIcon },
   { id: "services", label: "Services", icon: servicesIcon },
+  { id: "serviceAdmin", label: "Services"},
   { id: "history", label: "History", icon: historyIcon },
   { id: "currency", label: "Currency", icon: currencyIcon },
-  { id: "help", label: "Help", icon: helpIcon }
+  { id: "help", label: "Help", icon: helpIcon },
 ];
 
 const componentMap = {
-  "home": <div>Home</div>,
+  home: <div>Home</div>,
   "my-account": <MyAccount />,
-  "transfer": <Transfer />,
-  "queries": <Queries />,
-  "services": <ServiciosPage />,
-  "history": <History />,
-  "currency": <Currency />,
-  "help": <Help />
+  transfer: <Transfer />,
+  queries: <Queries />,
+  services: <ServiciosPage />,
+  serviceAdmin: <ServiciosAdminPage />,
+  history: <History />,
+  currency: <Currency />,
+  help: <Help />,
 };
 
 export const DashboardPage = () => {
