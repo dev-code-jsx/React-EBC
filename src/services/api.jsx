@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const apiClient = axios.create ({
-    baseURL: 'https://node-ebc.vercel.app/ebc/v1',
+    baseURL: 'http://localhost:3000/ebc/v1',
     timeout: 2000
 })
 
@@ -69,7 +69,7 @@ export const addFavorite = async (data) => {
         }
     }
 };
-export const transferFunds = async (data) => {
+export const createTransaction = async (data) => {
     try {
       const response = await apiClient.post('/transaction/transfer', data);
       return response.data;
@@ -86,7 +86,16 @@ export const transferFunds = async (data) => {
       }
     }
   };
-
+  export const getAccountDetails = async () => {
+    try {
+      return await apiClient.get('/transaction/accountDetails');
+    } catch (e) {
+      return {
+        error: true,
+        e
+      };
+    }
+  };
 
 export const getServicios = async () => {
     try {

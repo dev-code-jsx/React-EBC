@@ -4,10 +4,9 @@ import { useState } from "react";
 import {FavoriteModal} from "./FavoriteModal.jsx"
 import useTransfer from "../../shared/hooks/useTransfer.jsx";
 import useTransferForm from "../../shared/hooks/useTransferForm.jsx"
-
 export const TransferMForm = () => {
   const { formState, handleInputValueChange, handleInputValidationOnBlur } = useTransferForm();
-  const { transferFunds, isLoading, error } = useTransfer();
+  const { transferFunds, isLoading, error, accountDetails } = useTransfer();
 
   const [isFavoriteModalOpen, setIsFavoriteModalOpen] = useState(false);
 
@@ -44,18 +43,14 @@ export const TransferMForm = () => {
               <Input
                 field="fromAccount"
                 label="From Account"
-                value={formState.fromAccount.value}
-                onChangeHandler={handleInputValueChange}
-                onBlurHandler={handleInputValidationOnBlur}
+                value={accountDetails.accountNumber}
                 type="text"
-                showErrorMessage={formState.fromAccount.showError}
-                validationMessage={formState.fromAccount.validationMessage}
+                readOnly
               />
             </div>
             <div className="info-field">
-              <label>Account Number: 12345678</label>
-              <label>Account Balance: 5000 Quetzales</label>
-              <label>Date: 01/07/2024</label>
+              <label>Account Balance: {accountDetails.balance} Quetzales</label>
+              <label>Date: {new Date().toLocaleDateString()}</label>
             </div>
             <div className="input-field">
               <Input
