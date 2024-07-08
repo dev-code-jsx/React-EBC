@@ -1,18 +1,33 @@
 import "./transferMForm.css";
 import { Input } from "../Input";
 import { useState } from "react";
-import { FavoriteModal } from "./FavoriteModal";
-import useTransferForm from "../../shared/hooks/useTransferForm";
+import {FavoriteModal} from "./FavoriteModal.jsx"
+import useTransfer from "../../shared/hooks/useTransfer.jsx";
+import useTransferForm from "../../shared/hooks/useTransferForm.jsx"
 
 export const TransferMForm = () => {
   const { formState, handleInputValueChange, handleInputValidationOnBlur } = useTransferForm();
+  const { transferFunds, isLoading, error } = useTransfer();
 
   const [isFavoriteModalOpen, setIsFavoriteModalOpen] = useState(false);
 
   const handleAddFavoriteClick = () => {
     setIsFavoriteModalOpen(true);
   };
-  const toAccountValue = parseInt(formState.toAccount.value);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const amount = formState.amount.value;
+    const toAccount = formState.toAccount.value;
+
+    const response = await transferFunds(amount, toAccount);
+
+    if (!response.error) {
+      alert('Transfer successful');
+    } else {
+      alert('Transfer failed: ' + response.message);
+    }
+  };
 
   return (
     <div className="general-container">
@@ -23,7 +38,7 @@ export const TransferMForm = () => {
         </p>
       </div>
       <div>
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className="input-group">
             <div className="input-field">
               <Input
@@ -93,10 +108,13 @@ export const TransferMForm = () => {
             </div>
           </div>
           <div className="button-container">
-            <button className="submit-button">Transferir</button>
+            <button type="submit" className="submit-button" disabled={isLoading}>
+              {isLoading ? 'Transferring...' : 'Transferir'}
+            </button>
           </div>
         </form>
       </div>
+      {error && <div className="error-message">{error}</div>}
       <FavoriteModal 
         isOpen={isFavoriteModalOpen} 
         onClose={() => setIsFavoriteModalOpen(false)} 
