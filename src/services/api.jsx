@@ -70,6 +70,7 @@ export const addFavorite = async (data) => {
     }
 };
 
+
 export const getServicios = async () => {
     try {
         return await apiClient.get('/service/getServices');
