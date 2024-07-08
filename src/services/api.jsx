@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const apiClient = axios.create ({
-    baseURL: 'http://localhost:3000/ebc/v1',
+    baseURL: 'https://node-ebc.vercel.app/ebc/v1',
     timeout: 2000
 })
 
@@ -86,3 +86,15 @@ export const transferFunds = async (data) => {
       }
     }
   };
+
+
+export const getServicios = async () => {
+    try {
+        return await apiClient.get('/service/getServices');
+    } catch (e) {
+        return {
+            error: true,
+            e
+        }
+    }
+}
