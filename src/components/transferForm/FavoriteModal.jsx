@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { addFavorite } from "../../services";
+import "./favoriteModal.css"
 export const FavoriteModal = ({ isOpen, onClose, toAccount }) => {
     const [alias, setAlias] = useState('');
 

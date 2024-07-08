@@ -3,12 +3,23 @@ import { Input } from "../Input";
 import { useState } from "react";
 import {FavoriteModal} from "./FavoriteModal.jsx"
 import useTransfer from "../../shared/hooks/useTransfer.jsx";
+import { useEffect } from "react";
 import useTransferForm from "../../shared/hooks/useTransferForm.jsx"
 export const TransferMForm = () => {
-  const { formState, handleInputValueChange, handleInputValidationOnBlur } = useTransferForm();
+  const { formState, handleInputValueChange, handleInputValidationOnBlur, setFormState } = useTransferForm();
   const { transferFunds, isLoading, error, accountDetails } = useTransfer();
-
   const [isFavoriteModalOpen, setIsFavoriteModalOpen] = useState(false);
+
+  useEffect(() => {
+    if (!isLoading) {
+        setFormState({
+          fromAccount: { value: '', isValid: true, showError: false, validationMessage: '' },
+          toAccount: { value: '', isValid: true, showError: false, validationMessage: '' },
+          amount: { value: '', isValid: true, showError: false, validationMessage: '' },
+          description: { value: '', isValid: true, showError: false, validationMessage: '' },
+        });
+    }
+}, [isLoading, error, setFormState]);
 
   const handleAddFavoriteClick = () => {
     setIsFavoriteModalOpen(true);
@@ -16,16 +27,29 @@ export const TransferMForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const amount = formState.amount.value;
-    const toAccount = formState.toAccount.value;
+    const result = await transferFunds({
+      toAccount: formState.toAccount.value,
+      amount: Number(formState.amount.value),
+      description: formState.description.value,
+  });
 
-    const response = await transferFunds(amount, toAccount);
-
-    if (!response.error) {
-      alert('Transfer successful');
-    } else {
-      alert('Transfer failed: ' + response.message);
-    }
+  if (result && result.errors) {
+      console.error('Server validation errors:', result.errors);
+      result.errors.forEach(error => {
+          const { path, msg } = error;
+          setFormState(prevState => ({
+              ...prevState,
+              [path]: {
+                  ...prevState[path],
+                  isValid: false,
+                  showError: true,
+                  validationMessage: msg
+              }
+          }));
+      });
+  } else {
+      console.log('Transaction done correctly:', result);
+  }
   };
 
   return (
