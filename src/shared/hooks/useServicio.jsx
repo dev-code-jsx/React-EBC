@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { useState } from "react";
 import toast from "react-hot-toast";
-import { getServicios as getServiciosRequest } from "../services/api";
+import { getServicios as getServiciosRequest } from "../../services/api";
 
 export const useServicio = () => {
     const [servicios, setServicios] = useState([]);

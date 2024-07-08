@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const apiClient = axios.create ({
-    baseURL: 'https://node-ebc.vercel.app',
+    baseURL: 'https://node-ebc.vercel.app/ebc/v1',
     timeout: 2000
 })
 
@@ -72,7 +72,7 @@ export const addFavorite = async (data) => {
 
 export const getServicios = async () => {
     try {
-        return await apiClient.get('/getServices');
+        return await apiClient.get('/service/getServices');
     } catch (e) {
         return {
             error: true,
