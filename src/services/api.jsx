@@ -88,7 +88,7 @@ export const createTransaction = async (data) => {
   };
   export const getAccountDetails = async () => {
     try {
-      return await apiClient.get('/transaction/accountDetails');
+      return await apiClient.get('/account/accountDetails');
     } catch (e) {
       return {
         error: true,
