@@ -81,3 +81,14 @@ export const getServicios = async () => {
         }
     }
 }
+
+export const getAccountDetails = async () => {
+    try {
+      return await apiClient.get('/account/accountDetails');
+    } catch (e) {
+      return {
+        error: true,
+        e
+      };
+    }
+  };
