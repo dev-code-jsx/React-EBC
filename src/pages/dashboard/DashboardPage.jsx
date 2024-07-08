@@ -14,7 +14,7 @@ import helpIcon from '../../assets/img/helpIcon.png';
 import { MyAccount } from "../myAccount/MyAccount";
 import { Transfer } from "../transfer/Transfer";
 import { Queries } from "../queries/Queries";
-import { Service } from "../service/Service";
+import { ServiciosPage } from "../service/ServicePage";
 import { History } from "../history/History";
 import { Currency } from "../currency/Currency";
 import { Help } from "../help/Help";
@@ -35,7 +35,7 @@ const componentMap = {
   "my-account": <MyAccount />,
   "transfer": <Transfer />,
   "queries": <Queries />,
-  "services": <Service />,
+  "services": <ServiciosPage />,
   "history": <History />,
   "currency": <Currency />,
   "help": <Help />
@@ -72,7 +72,7 @@ export const DashboardPage = () => {
             {navItems.map((item) => (
               <button
                 key={item.id}
-                className="sidebar-button"
+                className={`sidebar-button ${activeComponent === item.id ? 'active' : ''}`}
                 onClick={() => handleNavClick(item.id)}
               >
                 <img

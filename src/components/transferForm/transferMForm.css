@@ -17,39 +17,121 @@
     font-weight: bold;
     color: #0E3B5D;
 }
+
 .subtitle {
     font-size: 1.2rem;
     color: gray;
 }
-.select-field {
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.input-field,
+.info-field {
     display: flex;
     flex-direction: column;
     gap: 5px;
 }
 
-.select-field label {
+.input-field label,
+.info-field label {
     color: #0E3B5D;
     font-weight: bold;
 }
 
-.select-field select {
+.input-field input {
     width: 98%;
     padding: 10px;
     border: 1px solid #0E3B5D;
     border-radius: 4px;
 }
 
-.select-field select:focus {
+.input-field input:focus {
     outline: none;
     border-color: #094069;
 }
-.select-option {
-    padding: 10px;
-    background-color: white;
-    color: #0E3B5D;
+
+.to-account-field {
+    width: 120%;
 }
 
-.select-option:hover {
+.to-account-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.fav-button,
+.fav-list-button {
     background-color: #0E3B5D;
     color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: 30px;
 }
+
+.fav-button:hover,
+.fav-list-button:hover {
+    background-color: #094069;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.submit-button {
+    background-color: #0E3B5D;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.submit-button:hover {
+    background-color: #094069;
+}
+.modal {
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .modal-content {
+    background-color: #fefefe;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 500px;
+    border-radius: 8px;
+  }
+  
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
