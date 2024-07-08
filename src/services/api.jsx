@@ -81,7 +81,23 @@ export const getServicios = async () => {
         }
     }
 }
-
+export const createTransaction = async (data) => {
+    try {
+      const response = await apiClient.post('/transaction/transfer', data);
+      return response.data;
+    } catch (error) {
+      if (error.response) {
+        console.error('Server response error:', error.response.data);
+        return error.response.data;
+      } else if (error.request) {
+        console.error('No response from server:', error.request);
+        return { error: true, message: 'No response from server' };
+      } else {
+        console.error('Axios configuration error:', error.message);
+        return { error: true, message: error.message };
+      }
+    }
+  };
 export const getAccountDetails = async () => {
     try {
       return await apiClient.get('/account/accountDetails');
