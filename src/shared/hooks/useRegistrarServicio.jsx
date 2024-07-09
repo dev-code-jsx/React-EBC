@@ -1,17 +1,26 @@
+import { useState } from "react";
 import toast from "react-hot-toast";
-import { registerService as registerServiceRequest } from "../../services/api";
+import { registerService  } from "../../services/api";
 
-export const useRegistrarServicio = (obtenerServicios) => {
+export const useRegistrarServicio = () => {
+  const [loading, setLoading] = useState(false);
+
   const registrarServicio = async (data) => {
-    const response = await registerServiceRequest(data);
-    if (response.error) {
-      return toast.error(
-        response.e.response?.data || "Error al registrar el servicio"
-      );
+    setLoading(true);
+    try {
+      const response = await registerService(data);
+      if (response.error) {
+        toast.error("Error al agregar el servicio");
+      } else {
+        toast.success("Servicio agregado con éxito");
+      }
+      setLoading(false);
+      return response;
+    } catch (error) {
+      toast.error("Error al procesar la solicitud");
+      setLoading(false);
     }
-    obtenerServicios();
-    return response.data;
   };
 
-  return { registrarServicio };
+  return { registrarServicio, loading };
 };

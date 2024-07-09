@@ -90,9 +90,9 @@ export const registerService = async (data) => {
   }
 };
 
-export const updateService = async (data) => {
+export const updateService = async (id, data) => {
   try {
-    return await apiClient.put(`/service/updateService/${data.id}`, data);
+    return await apiClient.put(`/service/updateService/${id}`, data);
   } catch (e) {
     return { error: true, e };
   }

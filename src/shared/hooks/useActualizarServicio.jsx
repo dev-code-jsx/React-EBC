@@ -1,17 +1,26 @@
+import { useState } from "react";
 import toast from "react-hot-toast";
-import { updateService as updateServiceRequest } from "../../services/api";
+import { updateService } from "../../services/api";
 
-export const useActualizarServicio = (obtenerServicios) => {
+export const useActualizarServicio = () => {
+  const [loading, setLoading] = useState(false);
+
   const actualizarServicio = async (data) => {
-    const response = await updateServiceRequest(data);
-    if (response.error) {
-      return toast.error(
-        response.e.response?.data || "Error al actualizar el servicio"
-      );
+    setLoading(true);
+    try {
+      const response = await updateService(data);
+      if (response.error) {
+        toast.error("Error al actualizar el servicio");
+      } else {
+        toast.success("Servicio actualizado con éxito");
+      }
+      setLoading(false);
+      return response;
+    } catch (error) {
+      toast.error("Error al procesar la solicitud");
+      setLoading(false);
     }
-    obtenerServicios();
-    return response.data;
   };
 
-  return { actualizarServicio };
+  return { actualizarServicio, loading };
 };
