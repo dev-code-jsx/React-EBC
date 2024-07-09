@@ -9,4 +9,5 @@ export * from './validateJob'
 export * from './validateMonthlyIncome'
 export * from './validateType'
 export * from './validatePassword'
+export * from './validatePasswordConfir'
 
