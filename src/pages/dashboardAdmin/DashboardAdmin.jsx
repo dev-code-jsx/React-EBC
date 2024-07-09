@@ -7,23 +7,27 @@ import accountIcon from "../../assets/img/myAccountIcon.png";
 import transerIcon from "../../assets/img/ranferIcon.png";
 import registerIcon from "../../assets/img/register.jpg";
 import helpIcon from '../../assets/img/helpIcon.png';
+import serviceIcon from '../../assets/img/servicesIcon.png'
 
 import { MyAccount } from "../myAccount/MyAccount";
 import { Help } from "../help/Help";
 import { Register } from "../../components/register/Register";
+import { ServiciosAdminPage } from "../service/ServiceAdminPage";
 
 const navItems = [
   { id: "home", label: "Home", icon: homeIcon },
   { id: "my-account", label: "My Account", icon: accountIcon },
   { id: "register", label: "Register", icon: registerIcon },
-  { id: "help", label: "Help", icon: helpIcon }
+  { id: "help", label: "Help", icon: helpIcon },
+  { id: "services", label: "Services", icon: serviceIcon}
 ];
 
 const componentMap = {
   "home": <div>Home</div>,
   "my-account": <MyAccount />,
   "register": <Register />,
-  "help": <Help />
+  "help": <Help />,
+  "services": <ServiciosAdminPage />
 };
 
 export const DashboardAdmin = () => {
