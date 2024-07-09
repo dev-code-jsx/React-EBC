@@ -1,37 +1,39 @@
 import "./accountInfo.css"
 import useAccountD from "../../shared/hooks/useAccountD"
-import { useEffect } from "react";
 
 export const AccountInfo = () => {
-  const { myAccountDetails} = useAccountD();
+  const { myAccountDetails } = useAccountD();
+
+  if (!myAccountDetails || !myAccountDetails.response) {
+    return <p>Loading...</p>; 
+  }
+
+  const { accountDetails, detailsUser } = myAccountDetails.response;
+  if (!accountDetails || !detailsUser) {
+    return <p>Loading...</p>;
+  }
 
   return (
-    <div className="container">
-      <div className="header">
-        <h2 className="title">Account Info</h2>
-        <img className="user-icon" src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png"/>
-        <p className="subdescription">Aquí está la información básica de tu cuenta</p>
+    <div className="container-my-account">
+      <div className="account-header-my-account">
+        <p className="account-number-my-account">GTQ - {accountDetails.accountNumber}</p>
+        <h2 className="account-owner-my-account">{detailsUser.names.toUpperCase()} {detailsUser.lastNames.toUpperCase()}</h2>
       </div>
-      <div className="info-container">
-        <div className="info">
-          <div className="info-section">
-            <label>Account number: {myAccountDetails.accountNumber}</label>
-            <div></div>
-          </div>
-          <div className="info-section">
-            <p>Balance: {myAccountDetails.balance}</p>
-            <div></div>
-          </div>
-          <div className="info-section">
-            <p>Type: {myAccountDetails.type}</p>
-            <div></div>
-          </div>
-          <div className="info-section">
-            <div></div>
-          </div>
-          <button className="button-changePass">Change Password</button>
+      <div className="account-balances-my-account">
+        <div className="balance-section-my-account">
+          <p className="balance-label-my-account">SALDO DISPONIBLE</p>
+          <p className="balance-value-my-account">{accountDetails.balance} GTQ</p>
+        </div>
+        <div className="balance-section-my-account">
+          <p className="balance-label-my-account">SALDO TOTAL</p>
+          <p className="balance-value-my-account">{accountDetails.balance} GTQ</p>
         </div>
       </div>
+      <div className="account-actions-my-account">
+        <button className="payments-button-my-account">Mis Servicios</button>
+        <button className="history-button-my-account">Historial</button>
+      </div>
     </div>
-  )
-}
+  );
+};
+

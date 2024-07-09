@@ -1,67 +1,69 @@
-.container {
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 16px;
-    background-color: #f9f9f9;
-    max-width: 800px;
-    width: 50%;
-    color: #333;
-    margin: 40px auto;
-  }
-  
-  .header {
-    text-align: center;
-    margin-bottom: 24px;
-  }
-  .user-icon{
-    height: 250px;
-    width: 250px;
-  }
-  .title {
-    font-size: 2.5rem;
-    font-weight: bold;
-    color: #0E3B5D;
-  }
-  
-  .subdescription {
-    font-size: 1.5rem;
-    color: #002855;
-  }
-  
-  .info-container {
-    font-size: 1.5rem;
-  }
-  
-  .info {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-  }
-  
-  .info-section {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 8px 0;
-    border-bottom: 1px solid #ddd;
-  }
-  
-  .info-section p {
-    margin: 0;
-    color: #333;
-  }
-  
-  .info-section div {
-    font-weight: bold;
-    color: #0E3B5D;
-  }
-  
-  .button-changePass {
-    background-color: #0E3B5D;
-    color: #fff;
-    padding: 8px 16px;
-    border: none;
-    border-radius: 8px;
-    font-size: 1.5rem;
-    cursor: pointer;
-  }
+.container-my-account {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 400px; 
+  font-family: Arial, sans-serif;
+  text-align: center;
+}
+
+.account-header-my-account {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.account-number-my-account {
+  font-size: 14px;
+  color: #777;
+  margin: 0;
+}
+
+.account-owner-my-account {
+  font-size: 18px;
+  color: #0D4E85;
+  margin: 5px 0 0;
+}
+
+.account-balances-my-account {
+  margin: 20px 0;
+}
+
+.balance-section-my-account {
+  margin-bottom: 10px;
+}
+
+.balance-label-my-account {
+  font-size: 12px;
+  color: #777;
+  margin: 0;
+}
+
+.balance-value-my-account {
+  font-size: 16px;
+  color: #333;
+  margin: 0;
+}
+
+.account-actions-my-account {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px 0;
+}
+
+.payments-button-my-account,
+.history-button-my-account {
+  background-color: #0D4E85;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 15px;
+  cursor: pointer;
+  width: 48%;
+  margin: 0; 
+}
+
+.payments-button-my-account:hover,
+.history-button-my-account:hover {
+  background-color: #0D4E85;
+}

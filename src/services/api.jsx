@@ -198,7 +198,7 @@ export const getAccountsAsc = async (orden) => {
 
 export const getUserDetails = async () => {
   try {
-    return await apiClient.get('/account/myAccountD');
+    return await apiClient.get('/account/accountDetailsUser');
   } catch (e) {
     return {
       error: true,

@@ -12,9 +12,7 @@ const useAccountD = () => {
             const response = await getUserDetails();
             if (!response.error) {
                 setUserDetails({
-                    accountNumber: response.data.accountNumber,
-                    balance: response.data.balance,
-                    type: response.data.type
+                    response: response.data,
                 });
             } else {
                 setError('Failed to fetch user details');
