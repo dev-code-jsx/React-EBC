@@ -1,7 +1,7 @@
 import "./transferMForm.css";
 import { Input } from "../Input";
 import { useState } from "react";
-import {FavoriteModal} from "./FavoriteModal.jsx"
+import { FavoriteModal } from "./FavoriteModal.jsx"
 import useTransfer from "../../shared/hooks/useTransfer.jsx";
 import { useEffect } from "react";
 import useTransferForm from "../../shared/hooks/useTransferForm.jsx"
@@ -13,14 +13,14 @@ export const TransferMForm = () => {
 
   useEffect(() => {
     if (!isLoading) {
-        setFormState({
-          fromAccount: { value: '', isValid: true, showError: false, validationMessage: '' },
-          toAccount: { value: '', isValid: true, showError: false, validationMessage: '' },
-          amount: { value: '', isValid: true, showError: false, validationMessage: '' },
-          description: { value: '', isValid: true, showError: false, validationMessage: '' },
-        });
+      setFormState({
+        fromAccount: { value: '', isValid: true, showError: false, validationMessage: '' },
+        toAccount: { value: '', isValid: true, showError: false, validationMessage: '' },
+        amount: { value: '', isValid: true, showError: false, validationMessage: '' },
+        description: { value: '', isValid: true, showError: false, validationMessage: '' },
+      });
     }
-}, [isLoading, error, setFormState]);
+  }, [isLoading, error, setFormState]);
 
   const handleAddFavoriteClick = () => {
     setIsFavoriteModalOpen(true);
@@ -32,29 +32,29 @@ export const TransferMForm = () => {
       toAccount: formState.toAccount.value,
       amount: Number(formState.amount.value),
       description: formState.description.value,
-  });
+    });
 
-  if (result && result.errors) {
+    if (result && result.errors) {
       console.error('Server validation errors:', result.errors);
       result.errors.forEach(error => {
-          const { path, msg } = error;
-          setFormState(prevState => ({
-              ...prevState,
-              [path]: {
-                  ...prevState[path],
-                  isValid: false,
-                  showError: true,
-                  validationMessage: msg
-              }
-          }));
+        const { path, msg } = error;
+        setFormState(prevState => ({
+          ...prevState,
+          [path]: {
+            ...prevState[path],
+            isValid: false,
+            showError: true,
+            validationMessage: msg
+          }
+        }));
       });
       toast.error("Transaction failed. Couldnt complete the transaction")
-  } else {
+    } else {
       toast.success("Transaction succesful")
-      setTimeout(() =>{
+      setTimeout(() => {
         window.location.reload()
       }, 1000)
-  }
+    }
   };
 
   return (
@@ -139,10 +139,10 @@ export const TransferMForm = () => {
         </form>
       </div>
       {error && <div className="error-message">{error}</div>}
-      <FavoriteModal 
-        isOpen={isFavoriteModalOpen} 
-        onClose={() => setIsFavoriteModalOpen(false)} 
-        toAccount={formState.toAccount.value} 
+      <FavoriteModal
+        isOpen={isFavoriteModalOpen}
+        onClose={() => setIsFavoriteModalOpen(false)}
+        toAccount={formState.toAccount.value}
       />
     </div>
   );
