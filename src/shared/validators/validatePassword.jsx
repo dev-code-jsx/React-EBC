@@ -1,5 +1,5 @@
 export const validatePassword = (password) =>{
-    const regex = /^\S{8,8}$/
+    const regex = /^\S{8}$/
 
     return regex.test(password)
 }
