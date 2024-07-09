@@ -1,4 +1,5 @@
-import { getAccountDetails } from "../../services";
+import { getAccountDetails} from "../../services";
+import { createTransaction } from "../../services";
 import { useEffect } from "react";
 import { useState } from "react";
 const useTransfer = () => {
@@ -22,10 +23,10 @@ const useTransfer = () => {
       fetchAccountDetails();
     }, []);
   
-    const transferFunds = async (amount, toAccount) => {
+    const transferFunds = async (data) => {
       setIsLoading(true);
       try {
-        const response = await createTransaction({ amount, toAccount });
+        const response = await createTransaction(data);
         setIsLoading(false);
         return response.data;
       } catch (e) {
