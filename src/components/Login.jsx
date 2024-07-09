@@ -55,7 +55,7 @@ export const Login = () => {
 
   const handleLogin = (event) => {
     event.preventDefault();
-
+    console.log("Login form submitted", formState.codeUser.value, formState.password.value);
     login(formState.codeUser.value, formState.password.value);
   };
 

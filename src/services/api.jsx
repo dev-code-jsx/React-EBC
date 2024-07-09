@@ -166,3 +166,15 @@ export const changePassword = async (data) => {
     }
   }
 }
+
+export const getAccountsAsc = async (orden) => {
+  try {
+    console.log('Orden:', orden);
+    return await apiClient.get(`/account/accounts-by-movements/${orden}`);
+  } catch (e) {
+    return {
+      error: true,
+      e
+    };
+  }
+}

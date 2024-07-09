@@ -13,10 +13,14 @@ import { Help } from "../help/Help";
 import { Register } from "../../components/register/Register";
 import { ServiciosAdminPage } from "../service/ServiceAdminPage";
 import { AccountAdmin } from "../accountAdmin";
+import { AccountAsc } from "../accountAsc";
+import { AccountDesc } from "../accountDesc";
 
 const navItems = [
   { id: "home", label: "Home", icon: homeIcon },
   { id: "accounts", label: "Accounts", icon: accountIcon },
+  { id: "accountsAsc", label: "Accounts 'Asc'", icon: accountIcon },
+  { id: "accountsDesc", label: "Accounts 'Desc'", icon: accountIcon },
   { id: "register", label: "Register", icon: registerIcon },
   { id: "help", label: "Help", icon: helpIcon },
   { id: "services", label: "Services", icon: serviceIcon}
@@ -25,9 +29,12 @@ const navItems = [
 const componentMap = {
   "home": <div>Home</div>,
   "accounts": <AccountAdmin />,
+  "accountsAsc": <AccountAsc />,
+  "accountsDesc": <AccountDesc />,
   "register": <Register />,
   "help": <Help />,
   "services": <ServiciosAdminPage />
+
 };
 
 export const DashboardAdmin = () => {
