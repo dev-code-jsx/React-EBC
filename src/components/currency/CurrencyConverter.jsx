@@ -29,34 +29,36 @@ const CurrencyConverter = () => {
         <div className="currency-converter">
             <h2>Convertir</h2>
             <div className="form-group">
-                <label>Saldo:</label>
-                <input type="number" value={balance} disabled />
+                <label>Mi Saldo:</label>
+                <div className="amount-display">{balance.toFixed(2)} GTQ</div>
             </div>
             <div className="form-group">
-                <label>De: GTQ (Moneda Base)</label>
+                <label>De:</label>
+                <div className="conversion-input">
+                    <select value="GTQ" disabled>
+                        <option value="GTQ">GTQ - Quetzal</option>
+                    </select>
+                    <select value={toCurrency} onChange={(e) => setToCurrency(e.target.value)}>
+                        {currencyOptions.map((option) => (
+                            <option key={option.value} value={option.value}>
+                                {option.label}
+                            </option>
+                        ))}
+                    </select>
+                    <button onClick={handleConvert} disabled={loading}>
+                        {loading ? 'Convirtiendo...' : 'Convertir'}
+                    </button>
+                </div>
             </div>
-            <div className="form-group">
-                <label>A:</label>
-                <select value={toCurrency} onChange={(e) => setToCurrency(e.target.value)}>
-                    {currencyOptions.map((option) => (
-                        <option key={option.value} value={option.value}>
-                            {option.label}
-                        </option>
-                    ))}
-                </select>
-            </div>
-            <button onClick={handleConvert} disabled={loading}>
-                {loading ? 'Convirtiendo...' : 'Convertir'}
-            </button>
 
             {error && <p className="error">{error}</p>}
 
             {convertedAmount && (
                 <div className="result">
-                    <h3>Conversion Result</h3>
-                    <p>Current Balance: {balance} GTQ</p>
-                    <p>Conversion Rate: {conversionRate}</p>
-                    <p>Amount Converted: {convertedAmount} {toCurrency}</p>
+                    <h3>Resultado de la Conversión</h3>
+                    <p>Saldo Actual: {balance} GTQ</p>
+                    <p>Tasa de Conversión: {conversionRate}</p>
+                    <p>Monto Convertido: {convertedAmount} {toCurrency}</p>
                 </div>
             )}
         </div>

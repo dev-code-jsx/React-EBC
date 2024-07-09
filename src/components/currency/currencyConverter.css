@@ -1,70 +1,76 @@
 .currency-converter {
-    max-width: 500px;
+    max-width: 800px;
     margin: 20px auto;
     padding: 20px;
-    border: 1px solid #e0e0e0;
-    border-radius: 10px;
-    background-color: #ffffff;
+    border-radius: 15px;
+    background-color: #f8f9fa; 
+    color: #333; 
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    font-family: 'Arial', sans-serif;
+    font-family: 'Roboto', sans-serif; 
 }
 
 .currency-converter h2 {
     text-align: center;
     margin-bottom: 20px;
-    color: #333333;
+    color: #0056b3;
     font-size: 1.75rem;
 }
 
 .currency-converter .form-group {
     margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .currency-converter label {
-    display: block;
     margin-bottom: 5px;
-    color: #555555;
+    color: #555;
     font-size: 1rem;
 }
 
 .currency-converter input,
 .currency-converter select {
-    width: 100%;
+    width: 200px;
     padding: 10px;
-    border: 1px solid #cccccc;
+    border: 1px solid #ced4da;
     border-radius: 5px;
     font-size: 1rem;
-    background-color: #fafafa;
-    transition: border-color 0.2s;
+    background-color: #ffffff;
+    color: #333;
+    margin-bottom: 10px;
 }
 
-.currency-converter input:focus,
-.currency-converter select:focus {
-    border-color: #007bff;
-    outline: none;
+.currency-converter select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: url('data:image/svg+xml;base64,...') no-repeat right center;
+    background-size: 10px;
 }
 
 .currency-converter select option {
-    color: #333333;
-    background-color: #ffffff;
+    color: #333;
+    background-color: #fff;
     padding: 10px;
     font-size: 1rem;
 }
 
 .currency-converter button {
-    width: 100%;
-    padding: 12px;
+    width: 150px;
+    padding: 10px;
     border: none;
     border-radius: 5px;
-    background-color: #007bff;
+    background-color: #0056b3;
     color: white;
     font-size: 1rem;
     cursor: pointer;
     transition: background-color 0.2s;
+    align-self: center;
 }
 
 .currency-converter button:disabled {
-    background-color: #cccccc;
+    background-color: #6c757d;
     cursor: not-allowed;
 }
 
@@ -73,7 +79,7 @@
 }
 
 .currency-converter .error {
-    color: #ff0000;
+    color: #dc3545;
     margin-top: 10px;
     text-align: center;
     font-size: 0.875rem;
@@ -81,45 +87,50 @@
 
 .currency-converter .result {
     margin-top: 20px;
-    background-color: #f9f9f9;
+    background-color: #f8f9fa;
     padding: 15px;
-    border: 1px solid #e0e0e0;
-    border-radius: 5px;
+    border-radius: 10px;
+    border: 1px solid #ced4da;
 }
 
 .currency-converter .result h3 {
     text-align: center;
     margin-bottom: 15px;
     font-size: 1.5rem;
-    color: #333333;
+    color: #0056b3; 
 }
 
 .currency-converter .result p {
     text-align: center;
     margin-bottom: 5px;
     font-size: 1rem;
-    color: #555555;
+    color: #555;
 }
 
-.currency-conversion-page {
-    padding: 20px;
-    background-color: #f0f2f5;
-    min-height: 100vh;
-}
-
-.currency-conversion-page h1 {
-    text-align: center;
-    margin-bottom: 40px;
-    color: #333333;
+.currency-converter .form-group .amount-display {
     font-size: 2rem;
+    font-weight: bold;
+    color: #0056b3;
+}
+
+.currency-converter .form-group .conversion-input {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.currency-converter .form-group .conversion-input select {
+    flex: 1;
+    margin: 0 10px;
+}
+
+.currency-converter .form-group .conversion-input button {
+    flex-shrink: 0;
 }
 
 @media (max-width: 600px) {
     .currency-converter {
         padding: 15px;
-        border-radius: 0;
-        box-shadow: none;
-        border: none;
     }
 
     .currency-converter h2 {
