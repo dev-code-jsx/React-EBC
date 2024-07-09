@@ -1,3 +1,4 @@
+import { data } from 'autoprefixer';
 import axios from 'axios';
 
 const apiClient = axios.create ({
@@ -152,5 +153,13 @@ export const convertCurrency = async (data) => {
       error: true,
       message: e.response?.data?.message || e.message,
   };
+  }
+}
+
+export const changePassword = async (data) => {
+  try {
+    return await apiClient.patch('/account/accountDetails/changePassword', data)
+  } catch (e) {
+    
   }
 }
