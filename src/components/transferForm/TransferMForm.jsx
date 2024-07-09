@@ -5,6 +5,7 @@ import {FavoriteModal} from "./FavoriteModal.jsx"
 import useTransfer from "../../shared/hooks/useTransfer.jsx";
 import { useEffect } from "react";
 import useTransferForm from "../../shared/hooks/useTransferForm.jsx"
+import toast from "react-hot-toast";
 export const TransferMForm = () => {
   const { formState, handleInputValueChange, handleInputValidationOnBlur, setFormState } = useTransferForm();
   const { transferFunds, isLoading, error, accountDetails } = useTransfer();
@@ -47,8 +48,12 @@ export const TransferMForm = () => {
               }
           }));
       });
+      toast.error("Transaction failed. Couldnt complete the transaction")
   } else {
-      console.log('Transaction done correctly:', result);
+      toast.success("Transaction succesful")
+      setTimeout(() =>{
+        window.location.reload()
+      }, 1000)
   }
   };
 
