@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const apiClient = axios.create ({
     baseURL: 'https://node-ebc.vercel.app/ebc/v1',
-    timeout: 2000
+    timeout: 5000
 })
 
 apiClient.interceptors.request.use(
@@ -132,3 +132,14 @@ export const deleteService = async (id) => {
     return { error: true, e };
   }
 };
+
+export const convertCurrency = async (data) => {
+  try {
+      return await apiClient.post('/currency/convert', data)
+  } catch (e) {
+    return {
+      error: true,
+      message: e.response?.data?.message || e.message,
+  };
+  }
+}
