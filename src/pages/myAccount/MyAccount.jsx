@@ -1,6 +1,10 @@
+import { AccountInfo } from '../../components/accountInfo/AccountInfo'
 
 export const MyAccount = () => {
   return (
-    <div>MyAccount</div>
+    <div>
+      <AccountInfo />
+    </div>
+    
   )
 }

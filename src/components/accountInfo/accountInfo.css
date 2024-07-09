@@ -55,3 +55,13 @@
     font-weight: bold;
     color: #0E3B5D;
   }
+  
+  .button-changePass {
+    background-color: #0E3B5D;
+    color: #fff;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.5rem;
+    cursor: pointer;
+  }

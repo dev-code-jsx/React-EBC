@@ -158,7 +158,7 @@ export const convertCurrency = async (data) => {
 
 export const changePassword = async (data) => {
   try {
-    return await apiClient.patch('/myAccount/changePassword', data)
+    return await apiClient.patch('/account/changePassword', data)
   } catch (e) {
     return {
       error: true,

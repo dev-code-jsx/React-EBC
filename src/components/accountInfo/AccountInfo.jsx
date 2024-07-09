@@ -25,6 +25,7 @@ export const AccountInfo = () => {
             <p>Created at: </p>
             <div></div>
           </div>
+          <button className="button-changePass">Change Password</button>
         </div>
       </div>
     </div>
