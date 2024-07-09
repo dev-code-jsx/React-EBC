@@ -1,30 +1,45 @@
-import { useState } from "react";
-import { addFavorite } from "../../services";
+import { useState, useEffect } from "react";
+import { Input } from "../Input";
+import useFavoriteForm from "../../shared/hooks/useFavoriteForm";
+import useFavorite from "../../shared/hooks/useFavorite";
 import "./favoriteModal.css"
 export const FavoriteModal = ({ isOpen, onClose, toAccount }) => {
-    const [alias, setAlias] = useState('');
+    const { formState, handleInputValueChange, handleInputValidationOnBlur, setFormState } = useFavoriteForm();
+    const { addFavoriteAccount, isLoading, error } = useFavorite();
 
-    const handleAddFavorite = async () => {
-        try {
-            const userDetails = JSON.parse(localStorage.getItem('user'));
+    useEffect(() => {
+        if (!isLoading) {
+            setFormState({
+                toAccount: { value: toAccount, isValid: true, showError: false, validationMessage: '' },
+                alias: { value: '', isValid: true, showError: false, validationMessage: '' },
+            });
+        }
+    }, [isLoading, toAccount, setFormState]);
 
-            const data = {
-                user: userDetails._id, 
-                accountNumber: toAccount,   
-                alias: alias,
-            };
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const result = await addFavoriteAccount({
+            accountNumber: formState.toAccount.value,
+            alias: formState.alias.value
+        });
 
-            const result = await addFavorite(data);
-
-            if (!result.error) {
-                alert("Favorite added successfully");
-                onClose();
-            } else {
-                alert("Error adding favorite: " + result.message);
-            }
-        } catch (error) {
-            console.error('Error adding favorite:', error);
-            alert('Error adding favorite');
+        if (result && result.errors) {
+            console.error('Server validation errors:', result.errors);
+            result.errors.forEach(error => {
+                const { path, msg } = error;
+                setFormState(prevState => ({
+                    ...prevState,
+                    [path]: {
+                        ...prevState[path],
+                        isValid: false,
+                        showError: true,
+                        validationMessage: msg
+                    }
+                }));
+            });
+        } else {
+            console.log('Favorite added correctly:', result);
+            onClose();
         }
     };
 
@@ -35,18 +50,37 @@ export const FavoriteModal = ({ isOpen, onClose, toAccount }) => {
             <div className="modal-content">
                 <span className="close" onClick={onClose}>&times;</span>
                 <h2>Add to Favorite</h2>
-                <div>
-                    <label>Account Number: {toAccount}</label>
-                </div>
-                <div>
-                    <label>Alias</label>
-                    <input
-                        type="text"
-                        value={alias}
-                        onChange={(e) => setAlias(e.target.value)}
-                    />
-                </div>
-                <button onClick={handleAddFavorite}>Add Favorite</button>
+                <form onSubmit={handleSubmit}>
+                    <div className="input-group">
+                        <div className="input-field">
+                            <Input
+                                field="toAccount"
+                                label="To Account"
+                                value={formState.toAccount.value}
+                                type="text"
+                                readOnly
+                            />
+                        </div>
+                        <div className="input-field">
+                            <Input
+                                field="alias"
+                                label="Alias"
+                                value={formState.alias.value}
+                                onChangeHandler={handleInputValueChange}
+                                onBlurHandler={handleInputValidationOnBlur}
+                                type="text"
+                                showErrorMessage={formState.alias.showError}
+                                validationMessage={formState.alias.validationMessage}
+                            />
+                        </div>
+                    </div>
+                    <div className="button-container">
+                        <button type="submit" className="submit-button" disabled={isLoading}>
+                            {isLoading ? 'Adding...' : 'Add Favorite'}
+                        </button>
+                    </div>
+                </form>
+                {error && <div className="error-message">{error}</div>}
             </div>
         </div>
     );
