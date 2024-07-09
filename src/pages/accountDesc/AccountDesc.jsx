@@ -13,7 +13,8 @@ export const AccountDesc = () => {
             <th>Account Number</th>
             <th>Balance</th>
             <th>Type</th>
-            <th>status</th>
+            <th>Status</th>
+            <th>Detalle</th>
           </tr>
         </thead>
         <tbody>
@@ -23,6 +24,9 @@ export const AccountDesc = () => {
               <td>{user.balance}</td>
               <td>{user.type}</td>
               <td>{user.status}</td>
+              <td>
+                <button>Detalle</button>
+              </td>
             </tr>
           ))}
         </tbody>
