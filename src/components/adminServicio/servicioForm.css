@@ -1,0 +1,74 @@
+.servicio-form {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .form-title {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #003366; /* Azul oscuro */
+  }
+  
+  .input-container {
+    margin-bottom: 15px;
+  }
+  
+  .form-label {
+    display: block;
+    margin-bottom: 5px;
+    color: #003366; /* Azul oscuro */
+    font-weight: bold;
+  }
+  
+  .form-input {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #003366; /* Azul oscuro */
+    border-radius: 4px;
+    background-color: #fff;
+    color: #003366; /* Azul oscuro */
+  }
+  
+  .form-input.textarea {
+    resize: vertical;
+  }
+  
+  .input-error {
+    border-color: red;
+  }
+  
+  .error-message {
+    color: red;
+    font-size: 0.875em;
+    margin-top: 5px;
+  }
+  
+  .form-button {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: #003366; /* Azul oscuro */
+    color: white;
+    font-size: 1em;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  .form-button:hover,
+  .delete-button:hover {
+    background-color: #002244; /* Azul más oscuro */
+  }
+  
+  .delete-button {
+    background-color: red;
+  }
+  
+  .delete-button:hover {
+    background-color: darkred;
+  }

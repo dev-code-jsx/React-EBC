@@ -8,16 +8,18 @@ import { RegisterPage } from "./pages/register/RegisterPage";
 import { DashboardAdmin } from "./pages/dashboardAdmin/DashboardAdmin";
 import { Help } from "./pages/help/Help";
 import { ServiciosPage } from "./pages/service/ServicePage";
+import { ServiciosAdminPage } from "./pages/service/ServiceAdminPage";
 const routes = [
   { path: "/*", element: <AuthPage /> },
   { path: "/dashboard", element: <DashboardPage /> },
   { path: "/register", element: <RegisterPage /> },
-  { path: "/help", element: <Help/>},
-  { path:"/queries", element:<Queries/>},
+  { path: "/help", element: <Help /> },
+  { path: "/queries", element: <Queries /> },
   { path: "/dashboardTest", element: <TestDashboard /> },
   { path: "/dashboardAdmin", element: <DashboardAdmin /> },
-  { path: "/transfer", element: <Transfer/>},
+  { path: "/transfer", element: <Transfer /> },
   { path: "/service", element: <ServiciosPage /> },
-]
+  { path: "/serviceAdmin", element: <ServiciosAdminPage /> },
+];
 
 export default routes;

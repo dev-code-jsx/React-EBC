@@ -27,18 +27,18 @@ const navItems = [
   { id: "services", label: "Services", icon: servicesIcon },
   { id: "history", label: "History", icon: historyIcon },
   { id: "currency", label: "Currency", icon: currencyIcon },
-  { id: "help", label: "Help", icon: helpIcon }
+  { id: "help", label: "Help", icon: helpIcon },
 ];
 
 const componentMap = {
-  "home": <div>Home</div>,
+  home: <div>Home</div>,
   "my-account": <MyAccount />,
-  "transfer": <Transfer />,
-  "queries": <Queries />,
-  "services": <ServiciosPage />,
-  "history": <History />,
-  "currency": <Currency />,
-  "help": <Help />
+  transfer: <Transfer />,
+  queries: <Queries />,
+  services: <ServiciosPage />,
+  history: <History />,
+  currency: <Currency />,
+  help: <Help />,
 };
 
 export const DashboardPage = () => {

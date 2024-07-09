@@ -1,3 +1,7 @@
 export { useRegister } from './useRegister.jsx'
 export { useRegisterForm } from './useRegisterForm.jsx'
 export { useServicio } from './useServicio.jsx'
+export { useObtenerServicio } from './useObtenerServicios.jsx'
+export { useRegistrarServicio } from './useRegistrarServicio.jsx'
+export { useActualizarServicio } from './useActualizarServicio.jsx'
+export { useEliminarServicio } from './useEliminarServicio.jsx'
