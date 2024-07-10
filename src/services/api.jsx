@@ -41,6 +41,47 @@ export const usersGet = async () => {
   }
 }
 
+export const userEdit = async (id, data) => {
+  try {
+    const response = await apiClient.put(`/user/update/${id}`, data);
+    return response.data;
+  } catch (e) {
+    console.error('Error in userEdit API call:', e);
+    console.log(data),
+    console.log(id)
+    return {
+      error: true,
+      e
+    };
+  }
+};
+
+export const getUser = async (id) => {
+  try {
+    const response = await apiClient.get(`/user/detailsUser/${id}`);
+    console.log('API getUser response:', response);
+    return response.data; 
+  } catch (e) {
+    console.error('Error in getUser API call:', e);
+    return {
+      error: true,
+      e
+    };
+  }
+};
+
+export const deleteUser = async (id) => {
+  try{
+    return await apiClient.delete(`/user/deleteUser/${id}`)
+  } catch (e) {
+    return {
+        error: true,
+        e
+    }
+}
+}
+
+
 
 export const register = async (data) => {
     try {
@@ -264,6 +305,35 @@ export const revertTransaction = async (idTransaction) => {
 export const revertDeposit = async (depositId) => {
   try {
     return await apiClient.put(`/deposit/revert/${depositId}`);
+  } catch (e) {
+    return {
+      error: true,
+      e
+    };
+  }
+}
+
+export const listFavorites = async () => {
+  try {
+      const response = await apiClient.get("/account/listFavorites");
+      return response.data;
+  } catch (error) {
+      if (error.response) {
+          console.error('Server response error:', error.response.data);
+          return error.response.data;
+      } else if (error.request) {
+          console.error('No response from server:', error.request);
+          return { error: true, message: 'No response from server' };
+      } else {
+          console.error('Axios configuration error:', error.message);
+          return { error: true, message: error.message };
+      }
+  }
+};
+
+export const getQueries = async () => {
+  try {
+    return await apiClient.get('/account/query');
   } catch (e) {
     return {
       error: true,

@@ -8,3 +8,7 @@ export { useEliminarServicio } from './useEliminarServicio.jsx'
 export  { useGetUsers } from './userGetUsers.jsx'
 export { useChangePassword } from './useChangePassword.jsx'
 export { useQuery } from './useQuery.jsx'
+export { useEditUser } from './useEditUser.jsx'
+export { useDeleteUser } from './useDeleteUser.jsx'
+
+    

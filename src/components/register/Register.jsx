@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from "react";
 import { Input } from "../Input";
 import { useRegister } from "../../shared/hooks/useRegister";
