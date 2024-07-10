@@ -16,6 +16,7 @@ import { AccountAdmin } from "../accountAdmin";
 import { DepositForm } from "../../components/deposit/DepositForm";
 import { AccountAsc } from "../accountAsc";
 import { AccountDesc } from "../accountDesc";
+import { HistoryDeposit } from "../historyDeposits";
 
 const navItems = [
   { id: "home", label: "Home", icon: homeIcon },
@@ -25,7 +26,8 @@ const navItems = [
   { id: "register", label: "Register", icon: registerIcon },
   { id: "help", label: "Help", icon: helpIcon },
   { id: "services", label: "Services", icon: serviceIcon},
-  { id: "deposit", label: "Deposit", icon: accountIcon}
+  { id: "deposit", label: "Deposit", icon: accountIcon},
+  { id: "deposits", label: "Deposit History", icon: accountIcon}
 ];
 
 const componentMap = {
@@ -36,7 +38,8 @@ const componentMap = {
   "register": <Register />,
   "help": <Help />,
   "services": <ServiciosAdminPage />,
-  "deposit": <DepositForm />
+  "deposit": <DepositForm />,
+  "deposits": <HistoryDeposit />
 };
 
 export const DashboardAdmin = () => {

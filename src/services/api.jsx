@@ -206,3 +206,47 @@ export const getUserDetails = async () => {
     };
   }
 };
+
+export const getTransactions = async () => {
+  try {
+    return await apiClient.get('/transaction/myTransactions');
+  } catch (e) {
+    return {
+      error: true,
+      e
+    };
+  }
+}
+
+export const getDeposits = async () => {
+  try {
+    return await apiClient.get('/deposit/depositsAll');
+  } catch (e) {
+    return {
+      error: true,
+      e
+    };
+  }
+}
+
+export const revertTransaction = async (idTransaction) => {
+  try {
+    return await apiClient.put(`/transaction/revert/${idTransaction}`);
+  } catch (e) {
+    return {
+      error: true,
+      e
+    };
+  }
+}
+
+export const revertDeposit = async (depositId) => {
+  try {
+    return await apiClient.put(`/deposit/revert/${depositId}`);
+  } catch (e) {
+    return {
+      error: true,
+      e
+    };
+  }
+}

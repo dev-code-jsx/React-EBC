@@ -47,3 +47,13 @@
     color: #009879;
     margin-top: 50px;
 }
+
+.btn-revertir{
+    background-color: red;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+    margin: 10px;
+}
