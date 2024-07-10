@@ -6,6 +6,9 @@
   width: 400px; 
   font-family: Arial, sans-serif;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
 }
 
 .account-header-my-account {
