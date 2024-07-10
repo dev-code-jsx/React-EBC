@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { getTransactions } from '../../services';
+import { getTransactions, revertTransaction } from '../../services';
 
 export const History = () => {
   const [transactions, setTransactions] = useState([]);
@@ -32,6 +32,25 @@ export const History = () => {
     return new Date(dateString).toLocaleDateString(undefined, options);
   };
 
+  const handleRevert = async (idTransaction) => {
+    try {
+      const response = await revertTransaction(idTransaction);
+
+      if (response && response.data && response.data.updatedTransaction) {
+        const updatedTransaction = response.data.updatedTransaction;
+        const updatedTransactions = transactions.map(transaction => {
+          if (transaction.idTransaction._id === updatedTransaction._id) {
+            return { ...transaction, idTransaction: updatedTransaction };
+          }
+          return transaction;
+        });
+        setTransactions(updatedTransactions);
+      }
+    } catch (err) {
+      setError(err.message);
+    }
+  };
+
   return (
     <div className="table-container">
       <table className="styled-table">
@@ -56,8 +75,13 @@ export const History = () => {
               <td>{transaction.idTransaction.description}</td>
               <td>{transaction.idTransaction.status}</td>
               <td>
-                {transaction.idTransaction.reversible && (
-                  <button className='btn-revertir'>Revertir</button>
+                {transaction.transaction.reversible && (
+                  <button
+                    className='btn-revertir'
+                    onClick={() => handleRevert(transaction.idTransaction._id)}
+                  >
+                    Revertir
+                  </button>
                 )}
               </td>
             </tr>
