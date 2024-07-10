@@ -3,7 +3,7 @@ import { Input } from "../Input";
 import useFavoriteForm from "../../shared/hooks/useFavoriteForm";
 import useFavorite from "../../shared/hooks/useFavorite";
 import "./favoriteModal.css"
-export const FavoriteModal = ({ isOpen, onClose, toAccount }) => {
+export const FavoriteModal = ({ isOpen, onClose, toAccount, onFavoriteAdded }) => {
     const { formState, handleInputValueChange, handleInputValidationOnBlur, setFormState } = useFavoriteForm();
     const { addFavoriteAccount, isLoading, error } = useFavorite();
 
@@ -40,6 +40,7 @@ export const FavoriteModal = ({ isOpen, onClose, toAccount }) => {
         } else {
             console.log('Favorite added correctly:', result);
             onClose();
+            onFavoriteAdded();
         }
     };
 

@@ -1,4 +1,3 @@
-import { data } from 'autoprefixer';
 import axios from 'axios';
 
 const apiClient = axios.create ({
@@ -206,3 +205,20 @@ export const getUserDetails = async () => {
     };
   }
 };
+export const listFavorites = async () =>{
+    try {
+        const response = await apiClient.get("/account/listFavorites");
+        return response.data
+      } catch (error) {
+        if (error.response) {
+          console.error('Server response error:', error.response.data);
+          return error.response.data;
+        } else if (error.request) {
+          console.error('No response from server:', error.request);
+          return { error: true, message: 'No response from server' };
+        } else {
+          console.error('Axios configuration error:', error.message);
+          return { error: true, message: error.message };
+        }
+      }
+}

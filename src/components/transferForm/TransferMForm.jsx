@@ -1,23 +1,51 @@
-import "./transferMForm.css";
-import { Input } from "../Input";
-import { useState } from "react";
-import { FavoriteModal } from "./FavoriteModal.jsx"
-import useTransfer from "../../shared/hooks/useTransfer.jsx";
-import { useEffect } from "react";
-import useTransferForm from "../../shared/hooks/useTransferForm.jsx"
-import toast from "react-hot-toast";
+import './transferMForm.css';
+import { Input } from '../Input';
+import { useState } from 'react';
+import { FavoriteModal } from './FavoriteModal.jsx';
+import useTransfer from '../../shared/hooks/useTransfer.jsx';
+import { useEffect } from 'react';
+import useTransferForm from '../../shared/hooks/useTransferForm.jsx';
+import toast from 'react-hot-toast';
+import { ListFavoritesModal } from './ListFavoritesModal.jsx';
 export const TransferMForm = () => {
-  const { formState, handleInputValueChange, handleInputValidationOnBlur, setFormState } = useTransferForm();
+  const {
+    formState,
+    handleInputValueChange,
+    handleInputValidationOnBlur,
+    setFormState,
+  } = useTransferForm();
   const { transferFunds, isLoading, error, accountDetails } = useTransfer();
   const [isFavoriteModalOpen, setIsFavoriteModalOpen] = useState(false);
+  const [isListFavoritesModalOpen, setIsListFavoritesModalOpen] =
+    useState(false);
 
   useEffect(() => {
     if (!isLoading) {
       setFormState({
-        fromAccount: { value: '', isValid: true, showError: false, validationMessage: '' },
-        toAccount: { value: '', isValid: true, showError: false, validationMessage: '' },
-        amount: { value: '', isValid: true, showError: false, validationMessage: '' },
-        description: { value: '', isValid: true, showError: false, validationMessage: '' },
+        fromAccount: {
+          value: '',
+          isValid: true,
+          showError: false,
+          validationMessage: '',
+        },
+        toAccount: {
+          value: '',
+          isValid: true,
+          showError: false,
+          validationMessage: '',
+        },
+        amount: {
+          value: '',
+          isValid: true,
+          showError: false,
+          validationMessage: '',
+        },
+        description: {
+          value: '',
+          isValid: true,
+          showError: false,
+          validationMessage: '',
+        },
       });
     }
   }, [isLoading, error, setFormState]);
@@ -25,7 +53,31 @@ export const TransferMForm = () => {
   const handleAddFavoriteClick = () => {
     setIsFavoriteModalOpen(true);
   };
-
+  const handleListFavoritesClick = () => {
+    setIsListFavoritesModalOpen(true);
+  };
+  const handleFavoriteSelect = (accountNumber) => {
+    setFormState((prevState) => ({
+      ...prevState,
+      toAccount: {
+        ...prevState.toAccount,
+        value: accountNumber,
+      },
+    }));
+    setIsListFavoritesModalOpen(false);
+  };
+  const clearToAccount = () => {
+    setFormState((prevState) => ({
+      ...prevState,
+      toAccount: {
+        ...prevState.toAccount,
+        value: '',
+      },
+    }));
+  };
+  const handleFavoriteAdded = () => {
+    clearToAccount();
+  };
   const handleSubmit = async (e) => {
     e.preventDefault();
     const result = await transferFunds({
@@ -36,24 +88,24 @@ export const TransferMForm = () => {
 
     if (result && result.errors) {
       console.error('Server validation errors:', result.errors);
-      result.errors.forEach(error => {
+      result.errors.forEach((error) => {
         const { path, msg } = error;
-        setFormState(prevState => ({
+        setFormState((prevState) => ({
           ...prevState,
           [path]: {
             ...prevState[path],
             isValid: false,
             showError: true,
-            validationMessage: msg
-          }
+            validationMessage: msg,
+          },
         }));
       });
-      toast.error("Transaction failed. Couldnt complete the transaction")
+      toast.error('Transaction failed. Couldnt complete the transaction');
     } else {
-      toast.success("Transaction succesful")
+      toast.success('Transaction succesful');
       setTimeout(() => {
-        window.location.reload()
-      }, 1000)
+        window.location.reload();
+      }, 1000);
     }
   };
 
@@ -113,7 +165,11 @@ export const TransferMForm = () => {
                 >
                   Add to Favorite
                 </button>
-                <button type="button" className="fav-list-button">
+                <button
+                  type="button"
+                  className="fav-list-button"
+                  onClick={handleListFavoritesClick}
+                >
                   Favorite List
                 </button>
               </div>
@@ -132,7 +188,11 @@ export const TransferMForm = () => {
             </div>
           </div>
           <div className="button-container">
-            <button type="submit" className="submit-button" disabled={isLoading}>
+            <button
+              type="submit"
+              className="submit-button"
+              disabled={isLoading}
+            >
               {isLoading ? 'Transferring...' : 'Transferir'}
             </button>
           </div>
@@ -143,6 +203,12 @@ export const TransferMForm = () => {
         isOpen={isFavoriteModalOpen}
         onClose={() => setIsFavoriteModalOpen(false)}
         toAccount={formState.toAccount.value}
+        onFavoriteAdded={handleFavoriteAdded}
+      />
+      <ListFavoritesModal
+        isOpen={isListFavoritesModalOpen}
+        onClose={() => setIsListFavoritesModalOpen(false)}
+        onSelect={handleFavoriteSelect}
       />
     </div>
   );
