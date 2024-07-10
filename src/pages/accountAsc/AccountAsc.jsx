@@ -13,7 +13,6 @@ export const AccountAsc = () => {
             <th>Balance</th>
             <th>Type</th>
             <th>Status</th>
-            <th>Detalle</th>
           </tr>
         </thead>
         <tbody>
@@ -23,9 +22,6 @@ export const AccountAsc = () => {
               <td>{user.balance}</td>
               <td>{user.type}</td>
               <td>{user.status}</td>
-              <td>
-                <button>Detalle</button>
-              </td>
             </tr>
           ))}
         </tbody>

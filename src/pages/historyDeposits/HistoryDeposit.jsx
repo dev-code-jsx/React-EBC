@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react'
 import { getDeposits, revertDeposit } from '../../services';
+import toast from 'react-hot-toast';
 
 export const HistoryDeposit = () => {
   const [receivedDeposit, setReceivedDeposit] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
     const fetchDeposits = async () => {
       try {
         const response = await getDeposits();
@@ -23,8 +23,9 @@ export const HistoryDeposit = () => {
       }
     };
 
+  useEffect (() => {
     fetchDeposits();
-  }, []);
+  }, [])
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>{error}</p>;
@@ -38,18 +39,12 @@ export const HistoryDeposit = () => {
     try {
       const response = await revertDeposit(idDeposit);
 
-      if (response && response.data && response.data.updatedDeposit) {
-        const updatedDeposit = response.data.updatedDeposit;
-        const updatedDeposits = receivedDeposit.map(deposit => {
-          if (deposit.idDeposit._id === updatedDeposit._id) {
-            return { ...deposit, idDeposit: updatedDeposit };
-          }
-          return deposit;
-        });
-        setReceivedDeposit(updatedDeposits);
-      }
+        toast.success('Deposit reverted successfully');
+        await fetchDeposits(); 
+
     } catch (err) {
       setError(err.message);
+      toast.error('Error al revertir el depósito');
     }
   };
 

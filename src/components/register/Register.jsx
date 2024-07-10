@@ -3,6 +3,7 @@ import { Input } from "../Input";
 import { useRegister } from "../../shared/hooks/useRegister";
 import useRegisterForm from "../../shared/hooks/useRegisterForm";
 import "./register.css";
+import toast from "react-hot-toast";
 
 export const Register = () => {
     const { formState, handleInputValueChange, handleInputValidationOnBlur, setFormState } = useRegisterForm();
@@ -70,9 +71,7 @@ export const Register = () => {
                 setServerErrors(result.errors);
             } else {
                 setServerErrors([]);
-
-                console.log('User registered successfully:', result);
-
+                toast.success('User registered successfully');
             }
         }
     };
@@ -252,6 +251,7 @@ export const Register = () => {
                                         showErrorMessage={formState.type.showError}
                                         validationMessage={formState.type.validationMessage}
                                     />
+                                    <span>SAVING - MONETARY</span>
                                 </div>
                             </div>
                         </div>

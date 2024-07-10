@@ -14,7 +14,6 @@ export const AccountDesc = () => {
             <th>Balance</th>
             <th>Type</th>
             <th>Status</th>
-            <th>Detalle</th>
           </tr>
         </thead>
         <tbody>
@@ -24,9 +23,6 @@ export const AccountDesc = () => {
               <td>{user.balance}</td>
               <td>{user.type}</td>
               <td>{user.status}</td>
-              <td>
-                <button>Detalle</button>
-              </td>
             </tr>
           ))}
         </tbody>

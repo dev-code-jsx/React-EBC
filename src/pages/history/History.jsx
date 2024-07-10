@@ -1,26 +1,27 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react';
 import { getTransactions, revertTransaction } from '../../services';
+import toast from 'react-hot-toast';
 
 export const History = () => {
   const [transactions, setTransactions] = useState([]);
   const [receivedTransactions, setReceivedTransactions] = useState([]);
-  const [receivedDeposit, setReceivedDeposit] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    const fetchTransactions = async () => {
-      try {
-        const response = await getTransactions();
-        setTransactions(response.data.transactions);
-        setReceivedTransactions(response.data.receivedTransactions);
-        setLoading(false);
-      } catch (err) {
-        setError(err.message);
-        setLoading(false);
-      }
-    };
+  const fetchTransactions = async () => {
+    try {
+      const response = await getTransactions();
+      console.log('Transactions:', response.data.transactions);
+      setTransactions(response.data.transactions);
+      setReceivedTransactions(response.data.receivedTransactions);
+      setLoading(false);
+    } catch (err) {
+      setError(err.message);
+      setLoading(false);
+    }
+  };
 
+  useEffect(() => {
     fetchTransactions();
   }, []);
 
@@ -36,18 +37,11 @@ export const History = () => {
     try {
       const response = await revertTransaction(idTransaction);
 
-      if (response && response.data && response.data.updatedTransaction) {
-        const updatedTransaction = response.data.updatedTransaction;
-        const updatedTransactions = transactions.map(transaction => {
-          if (transaction.idTransaction._id === updatedTransaction._id) {
-            return { ...transaction, idTransaction: updatedTransaction };
-          }
-          return transaction;
-        });
-        setTransactions(updatedTransactions);
-      }
+        toast.success('Transaction reverted successfully');
+        await fetchTransactions();
     } catch (err) {
       setError(err.message);
+      toast.error('Error al revertir la transacción');
     }
   };
 
@@ -75,7 +69,7 @@ export const History = () => {
               <td>{transaction.idTransaction.description}</td>
               <td>{transaction.idTransaction.status}</td>
               <td>
-                {transaction.transaction.reversible && (
+                {transaction.idTransaction.reversible && (
                   <button
                     className='btn-revertir'
                     onClick={() => handleRevert(transaction.idTransaction._id)}
