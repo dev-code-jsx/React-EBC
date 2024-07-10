@@ -1,72 +1,69 @@
-.servicio-card-admin-container {
+.servicio-card-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 20px;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-}
-
-.servicio-card-admin {
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .servicio-card {
+    border: 1px solid #ccc;
+    border-radius: 8px;
     overflow: hidden;
-    transition: transform 0.3s, box-shadow 0.3s;
-    display: flex;
-    flex-direction: column;
-}
-
-.servicio-card-admin:hover {
-    transform: scale(1.05);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-}
-
-.servicio-imagen-admin {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .servicio-card-content {
+    padding: 16px;
+  }
+  
+  .servicio-imagen {
     width: 100%;
-    height: 150px;
-    object-fit: cover;
-}
-
-.servicio-card-content-admin {
-    padding: 20px;
-    text-align: center;
-}
-
-.servicio-titulo-admin {
-    font-size: 20px;
-    margin: 10px 0;
-    font-weight: bold;
-    color: #213547;
-}
-
-.servicio-descripcion-admin {
-    font-size: 16px;
-    color: #777;
-    margin-bottom: 20px;
-}
-
-.servicio-precio-admin {
-    font-size: 16px;
-    color: #213547;
-    margin-bottom: 20px;
-}
-
-.editar,
-.eliminar {
-    background-color: #213547;
-    color: #ffffff;
+    height: auto;
+    border-bottom: 1px solid #eee;
+  }
+  
+  .servicio-titulo {
+    font-size: 1.5rem;
+    margin-bottom: 8px;
+  }
+  
+  .servicio-descripcion {
+    color: #666;
+  }
+  
+  .acciones {
+    margin-top: 16px;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .acciones button {
+    padding: 8px 16px;
     border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
+    border-radius: 4px;
     cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s, transform 0.3s;
-    margin: 5px 0;
-}
-
-.editar:hover,
-.eliminar:hover {
-    background-color: #1a2a36;
-    transform: scale(1.05);
-}
+    transition: background-color 0.3s ease;
+  }
+  
+  .acciones button:hover {
+    background-color: #f0f0f0;
+  }
+  
+  .actualizar {
+    background-color: #4caf50;
+    color: white;
+  }
+  
+  .eliminar {
+    background-color: #f44336;
+    color: white;
+  }
+  
+  .solicitar {
+    background-color: #2196f3;
+    color: white;
+  }
+  
+  .servicio-precio {
+    margin-top: 8px;
+    font-weight: bold;
+  }
