@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./dashboardPage.css";
+import { useNavigate } from "react-router-dom";
 import logo from "../../assets/img/logo.png";
 
 import homeIcon from "../../assets/img/homeIcon.png";
@@ -10,6 +11,7 @@ import servicesIcon from '../../assets/img/servicesIcon.png';
 import historyIcon from '../../assets/img/historyIcon.png';
 import currencyIcon from '../../assets/img/currencyIcon.png';
 import helpIcon from '../../assets/img/helpIcon.png';
+import logoutIcon from '../../assets/img/logoutIcon.png';
 
 import { MyAccount } from "../myAccount/MyAccount";
 import { Transfer } from "../transfer/Transfer";
@@ -28,6 +30,7 @@ const navItems = [
   { id: "history", label: "History", icon: historyIcon },
   { id: "currency", label: "Currency", icon: currencyIcon },
   { id: "help", label: "Help", icon: helpIcon },
+  { id: "logout", label: "Logout", icon: logoutIcon }
 ];
 
 const componentMap = {
@@ -44,13 +47,21 @@ const componentMap = {
 export const DashboardPage = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeComponent, setActiveComponent] = useState("home");
+  const navigate = useNavigate();
 
   const handleNavClick = (id) => {
     if (id === "home") {
       window.location.reload();
+    } else if (id === "logout") {
+      handleLogout();
     } else {
       setActiveComponent(id);
     }
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("user");
+    navigate("/");
   };
 
   return (
