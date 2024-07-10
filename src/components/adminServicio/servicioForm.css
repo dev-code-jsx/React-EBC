@@ -1,74 +1,69 @@
+
 .servicio-form {
-    width: 100%;
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
-    border-radius: 8px;
-    background-color: #f9f9f9;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  .form-title {
-    text-align: center;
-    margin-bottom: 20px;
-    color: #003366; /* Azul oscuro */
-  }
-  
-  .input-container {
-    margin-bottom: 15px;
-  }
-  
-  .form-label {
-    display: block;
-    margin-bottom: 5px;
-    color: #003366; /* Azul oscuro */
-    font-weight: bold;
-  }
-  
-  .form-input {
-    width: 100%;
-    padding: 10px;
-    border: 2px solid #003366; /* Azul oscuro */
-    border-radius: 4px;
-    background-color: #fff;
-    color: #003366; /* Azul oscuro */
-  }
-  
-  .form-input.textarea {
-    resize: vertical;
-  }
-  
-  .input-error {
-    border-color: red;
-  }
-  
-  .error-message {
-    color: red;
-    font-size: 0.875em;
-    margin-top: 5px;
-  }
-  
-  .form-button {
-    width: 100%;
-    padding: 10px;
-    border: none;
-    border-radius: 4px;
-    background-color: #003366; /* Azul oscuro */
-    color: white;
-    font-size: 1em;
-    cursor: pointer;
-    margin-top: 10px;
-  }
-  
-  .form-button:hover,
-  .delete-button:hover {
-    background-color: #002244; /* Azul más oscuro */
-  }
-  
-  .delete-button {
-    background-color: red;
-  }
-  
-  .delete-button:hover {
-    background-color: darkred;
-  }
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(179, 150, 150, 0.1);
+}
+
+.servicio-form h2 {
+  margin-bottom: 20px;
+  text-align: center;
+  color: #0E3B5D;
+
+}
+
+.servicio-form form {
+  display: flex;
+  flex-direction: column;
+}
+
+.servicio-form :placeholder-shown {
+  display: flex;
+  flex-direction: column;
+  color: #0E3B5D;
+}
+
+.servicio-form input[type="text"],
+.servicio-form input[type="number"],
+.servicio-form textarea {
+  width: 90%;
+  margin-bottom: 10px;
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #ffffff;
+  color : #0E3B5D;
+}
+
+.servicio-form textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.servicio-form button {
+  background-color: #0E3B5D;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.servicio-form button:hover {
+  background-color: #0c4e80;
+}
+
+.servicio-form button[type="button"] {
+  background-color: #ccc;
+  margin-top: 10px;
+}
+
+.servicio-form button[type="button"]:hover {
+  background-color: #bbb;
+}

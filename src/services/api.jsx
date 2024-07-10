@@ -222,3 +222,14 @@ export const listFavorites = async () =>{
         }
       }
 }
+
+export const getQueries = async () => {
+  try {
+    return await apiClient.get('/account/query');
+  } catch (e) {
+    return {
+      error: true,
+      e
+    };
+  }
+}
