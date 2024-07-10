@@ -21,6 +21,9 @@ export const AccountInfo = () => {
       </div>
       <div className="account-balances-my-account">
         <div className="balance-section-my-account">
+          <p className="balance-label-my-account">TIPO DE CUENTA</p>
+          <p className="balance-value-my-account">{accountDetails.type}</p>
+
           <p className="balance-label-my-account">SALDO DISPONIBLE</p>
           <p className="balance-value-my-account">{accountDetails.balance} GTQ</p>
         </div>

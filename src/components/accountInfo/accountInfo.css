@@ -29,7 +29,7 @@
 }
 
 .account-balances-my-account {
-  margin: 20px 0;
+  margin: 15px 0;
 }
 
 .balance-section-my-account {
@@ -37,7 +37,8 @@
 }
 
 .balance-label-my-account {
-  font-size: 12px;
+  font-size: 13px;
+  padding: 5px;
   color: #777;
   margin: 0;
 }
