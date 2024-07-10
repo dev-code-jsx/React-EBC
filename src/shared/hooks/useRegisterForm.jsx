@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-const useRegisterForm = () => {
+export const useRegisterForm = () => {
     const [formState, setFormState] = useState({
         username: { value: '', isValid: true, showError: false, validationMessage: '' },
         names: { value: '', isValid: true, showError: false, validationMessage: '' },
