@@ -5,6 +5,7 @@ import toast from 'react-hot-toast';
 export const History = () => {
   const [transactions, setTransactions] = useState([]);
   const [receivedTransactions, setReceivedTransactions] = useState([]);
+  const [receivedDeposits, setReceivedDeposits] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -14,6 +15,8 @@ export const History = () => {
       console.log('Transactions:', response.data.transactions);
       setTransactions(response.data.transactions);
       setReceivedTransactions(response.data.receivedTransactions);
+      console.log('Deposits:', response.data.receivedDeposit);
+      setReceivedDeposits(response.data.receivedDeposit);
       setLoading(false);
     } catch (err) {
       setError(err.message);
@@ -88,6 +91,16 @@ export const History = () => {
               <td>{formatDate(transaction.idTransaction.date)}</td>
               <td>{transaction.idTransaction.description}</td>
               <td>{transaction.idTransaction.status}</td>
+            </tr>
+          ))}
+          {receivedDeposits.map(deposit => (
+            <tr key={deposit.idDeposit._id}>
+              <td>---</td>
+              <td>{deposit.idDeposit.toAccount}</td>
+              <td style={{ color: 'green' }}>+ {deposit.idDeposit.amount}</td>
+              <td>{formatDate(deposit.idDeposit.date)}</td>
+              <td>---</td>
+              <td>{deposit.idDeposit.status}</td>
             </tr>
           ))}
         </tbody>

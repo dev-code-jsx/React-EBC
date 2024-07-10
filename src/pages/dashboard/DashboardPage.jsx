@@ -34,7 +34,9 @@ const navItems = [
 ];
 
 const componentMap = {
-  home: <div>Home</div>,
+  "home": <div>
+    <img src="https://github.com/echamale-2022222/imagenes/blob/main/MicrosoftTeams-image.png?raw=true" alt="Logo" />
+  </div>,
   "my-account": <MyAccount />,
   transfer: <Transfer />,
   queries: <Queries />,

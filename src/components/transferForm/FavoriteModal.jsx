@@ -41,6 +41,7 @@ export const FavoriteModal = ({ isOpen, onClose, toAccount, onFavoriteAdded }) =
             console.log('Favorite added correctly:', result);
             onClose();
             onFavoriteAdded();
+            e.target.reset();
         }
     };
 

@@ -32,10 +32,7 @@ export const AccountInfo = () => {
           <p className="balance-value-my-account">{accountDetails.balance} GTQ</p>
         </div>
       </div>
-      <div className="account-actions-my-account">
-        <button className="payments-button-my-account">Mis Servicios</button>
-        <button className="history-button-my-account">Historial</button>
-      </div>
+      
     </div>
   );
 };

@@ -11,7 +11,7 @@ export const useRegisterForm = () => {
         email: { value: '', isValid: true, showError: false, validationMessage: '' },
         job: { value: '', isValid: true, showError: false, validationMessage: '' },
         monthlyIncome: { value: '', isValid: true, showError: false, validationMessage: '' },
-        type: { value: '', isValid: true, showError: false, validationMessage: '' },
+        type: { value: '', isValid: true, showError: false, validationMessage: '' }    
     });
 
     const handleInputValueChange = (value, field) => {

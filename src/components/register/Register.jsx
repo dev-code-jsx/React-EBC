@@ -24,6 +24,7 @@ export const Register = () => {
                 job: { value: '', isValid: true, showError: false, validationMessage: '' },
                 monthlyIncome: { value: '', isValid: true, showError: false, validationMessage: '' },
                 type: { value: '', isValid: true, showError: false, validationMessage: '' },
+                role: { value: '', isValid: true, showError: false, validationMessage: '' },
             });
         }
     }, [isLoading, serverErrors, setFormState]);
@@ -51,7 +52,7 @@ export const Register = () => {
                 email: formState.email.value,
                 job: formState.job.value,
                 monthlyIncome: formState.monthlyIncome.value,
-                type: formState.type.value,
+                type: formState.type.value
             });
 
             if (result && result.errors) {
@@ -251,7 +252,7 @@ export const Register = () => {
                                         showErrorMessage={formState.type.showError}
                                         validationMessage={formState.type.validationMessage}
                                     />
-                                    <span>SAVING - MONETARY</span>
+                                    <span>SAVING     -     MONETARY</span>
                                 </div>
                             </div>
                         </div>
